@@ -4,17 +4,17 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ["plugin:react/recommended"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: ['react'],
+  plugins: ["react"],
   rules: {
-    'react/jsx-filename-extension': 0,
-    'react/react-in-jsx-scope': 0,
+    "react/jsx-filename-extension": 0,
+    "react/react-in-jsx-scope": 0,
   },
 };
