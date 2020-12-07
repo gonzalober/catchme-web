@@ -5,4 +5,3 @@ node_js:
 script:
   - yarn test
   - yarn run build
-  - yarn run lint
