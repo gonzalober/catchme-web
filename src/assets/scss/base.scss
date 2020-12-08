@@ -1,5 +1,5 @@
 // @import './_variables';
-// @import './_Home';
+@import './_home';
 // @import './_page1';
 // @import './_page2';
 
@@ -13,4 +13,8 @@ body {
   font-weight: 500;
   margin: 0;
   background-color: rgb(10, 31, 53)
+}
+
+.container {
+  text-align: center 
 }
