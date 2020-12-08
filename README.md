@@ -64,3 +64,10 @@ Just one player, leaderboard filtered by times
 Inputs - date, name and precise time
 Leaderboard could be any database.  
 Heroku for hosting / travis
+
+### To run 
+
+```
+npm install 
+
+```
