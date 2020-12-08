@@ -5,7 +5,7 @@ export default class Home extends Component {
     return (
       <div className="main-content">
         <div className="header">
-          <h1>Catch Me</h1>
+          <h1>CatchMe</h1>
           <p>The app that keeps you running</p>
         </div>
         <button>How to play</button>
