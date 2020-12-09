@@ -7,23 +7,24 @@ import {
 } from "react-router-dom";
 import Setup from './Pages/Race-setup.js'
 import Home from './Pages/Home.js';
+import Leaderboard from './Pages/Leaderboard.js';
+import RaceEnd from './Pages/Race-end.js';
+import HowToPlay from './Pages/How-to-play.js';
+import Lobby from './Pages/Lobby.js';
 
 function App() {
   return (
     <Router>
     <div className="container">
-      <Switch>
-        <Route path="/">
-          <Home />
-        </Route>
-        <Route path="/race">
-          <Setup />
-        </Route>
-      </Switch>
+        <Route exact path="/"><Home /></Route>
+        <Route exact path="/setup"><Setup /></Route>
+        <Route exact path="/leaderboard"><Leaderboard /></Route>
+        <Route exact path="/race-end"><RaceEnd /></Route>
+        <Route exact path="/how-to-play"><HowToPlay /></Route>
+        <Route exact path="/Lobby"><Lobby /></Route>
     </div>
     </Router>
 
-  );
-}
+)}
 
 export default App;
