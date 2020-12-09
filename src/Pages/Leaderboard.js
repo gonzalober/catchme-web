@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
 export default class Leaderboard extends Component {
   render() {
@@ -27,6 +28,8 @@ export default class Leaderboard extends Component {
             </tbody>
           </table>
         </div>
+          <button><Link to={"/"}>Home</Link></button>
+          <button><Link to={"/setup"}>Create a race</Link></button>
       </div>
     );
   }

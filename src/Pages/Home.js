@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
 import logo from '../images/logo.gif'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Setup from './Race-setup.js'
 import App from '../App'
 import Leaderboard from './Leaderboard'
+import HowToPlay from './Leaderboard'
 
 export default class Home extends Component {
   render() {
     return (
       <div className="main-content">
+        <div className="header">
           <h1>CatchMe</h1>
           <p>The app that keeps you running</p>
-          <nav>
-        <button><a href="https://www.bbc.co.uk">How to play</a></button>
-        <button><Link to={"/race"}>Create a race</Link></button>
-        <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
-        </nav>
-        <img src={logo} alt="Logo" />
         </div>
+          <button><Link to={"/how-to-play"}>How to play</Link></button>
+          <button><Link to={"/setup"}>Create a race</Link></button>
+          <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
+          <img src={logo} alt="Logo" />
+      </div>
     )
   }
 }
