@@ -31,9 +31,10 @@ export default function RadioButtonsGroup() {
       <FormControl className="form" component="fieldset">
         <FormLabel component="legend">Please select distance</FormLabel>
         <RadioGroup aria-label="distance" name="distance1" value={value} onChange={handleChange}>
+          <FormControlLabel value="500m" control={<Radio />} label="500m" />
           <FormControlLabel value="1km" control={<Radio />} label="1km" />
+          <FormControlLabel value="1.5km" control={<Radio />} label="1.5km" />
           <FormControlLabel value="2km" control={<Radio />} label="2km" />
-          <FormControlLabel value="3km" control={<Radio />} label="3km" />
           <FormControlLabel value="disabled" disabled control={<Radio />} label="(Custom -- Coming soon)" />
         </RadioGroup>
       </FormControl>
