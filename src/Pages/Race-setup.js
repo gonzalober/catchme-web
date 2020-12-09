@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import Demo from './Form';
+
 
 export default class Setup extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class Setup extends Component {
           <h1>CatchMe</h1>
           <p>Race parameters</p>
         </div>
-
+        <Demo />
       </div>
     )
   }
