@@ -1,0 +1,40 @@
+.header {
+  text-align: right;
+  color: white;
+  width: 100%;
+  letter-spacing: 5px;
+  text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
+    4px 0 0 #4405fc;
+  animation: blink 1s steps(4, start) infinite;
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 90px;
+
+  }
+
+  h1 {
+    white-space: nowrap;
+    animation: rightThenLeft 4s infinite;
+
+    @keyframes rightThenLeft {
+      0%   {margin-right:0;}
+      50%  {margin-right:100%;}
+      100% {margin-right:0;}
+    }
+  }
+
+}
+
+button {
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  margin: 11% auto;
+  font-size: 20px;
+}

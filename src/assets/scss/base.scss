@@ -1,0 +1,20 @@
+// @import './_variables';
+@import './_home';
+// @import './_page1';
+// @import './_page2';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: purple;
+  font-family: 'Press Start 2P', cursive;
+  font-weight: 500;
+  margin: 0;
+  background-color: rgb(10, 31, 53)
+}
+
+.container {
+  text-align: center 
+}

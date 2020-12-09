@@ -1,7 +1,7 @@
-import React from 'react';
-import Home from '../src/Pages/Home.js';
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils"
+// import React from 'react';
+// import Home from '../src/Pages/Home.js';
+// import { render, unmountComponentAtNode } from "react-dom";
+// import { act } from "react-dom/test-utils"
 
 // test('test the homepage loads with Title and Welcome', () => {
 //   render(<Home />);
@@ -28,10 +28,10 @@ import { act } from "react-dom/test-utils"
 //   });
 //   expect(container.textContent).toBe("Catch Me");
 // });
-describe('<Home />', () => {
-  it('renders h1', () => {
-    const wrapper = mount(<Home variant="h1" />);
-    const elem = wrapper.find('h1');
-    expect(elem.length).toBe(1);
-  });
-});
+// describe('<Home />', () => {
+//   it('renders h1', () => {
+//     const wrapper = mount(<Home variant="h1" />);
+//     const elem = wrapper.find('h1');
+//     expect(elem.length).toBe(1);
+//   });
+// });
