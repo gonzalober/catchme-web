@@ -15,9 +15,6 @@ function App() {
     <Router>
     <div className="container">
         <Route exact path="/"><Home /></Route>
-
-        <Route exact path="/race"><Setup /></Route>
-
         <Route exact path="/setup"><Setup /></Route>
         <Route exact path="/leaderboard"><Leaderboard /></Route>
         <Route exact path="/race-end"><RaceEnd /></Route>
