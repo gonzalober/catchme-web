@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Setup from './Pages/Race-setup.js'
 import Home from './Pages/Home.js';
@@ -22,6 +20,7 @@ function App() {
         <Route exact path="/race-end"><RaceEnd /></Route>
         <Route exact path="/how-to-play"><HowToPlay /></Route>
         <Route exact path="/Lobby"><Lobby /></Route>
+
     </div>
     </Router>
 
