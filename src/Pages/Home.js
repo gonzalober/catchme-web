@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logo from '../images/logo.gif'
 
 export default class Home extends Component {
   render() {
@@ -11,6 +12,7 @@ export default class Home extends Component {
         <button>How to play</button>
         <button>Create a race</button>
         <button>Leaderboard</button>
+        <img src={logo} alt="Logo" />
       </div>
     )
   }
