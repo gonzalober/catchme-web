@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Setup from './Race-setup.js'
 import App from '../App'
+import Leaderboard from './Leaderboard'
 
 export default class Home extends Component {
   render() {
@@ -17,8 +18,8 @@ export default class Home extends Component {
           <p>The app that keeps you running</p>
           <nav>
         <button><a href="https://www.bbc.co.uk">How to play</a></button>
-        <button><Link to="/race">Create a race</Link></button>
-        <button><a href="https://www.bbc.co.uk">Leaderboard</a></button>
+        <button><Link to={"/race"}>Create a race</Link></button>
+        <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
         </nav>
         <img src={logo} alt="Logo" />
         </div>
