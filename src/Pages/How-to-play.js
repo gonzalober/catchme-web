@@ -14,8 +14,6 @@ export default class HowToPlay extends Component {
             <p>3 - Start race</p>
             <p>4 - Race ends</p>
         </div>
-        <button><Link to={"/"}>Home</Link></button>
-        <button><Link to={"/setup"}>Create a race</Link></button>
       </div>
     )
   }

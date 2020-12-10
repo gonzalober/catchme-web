@@ -9634,6 +9634,11 @@ react-shallow-renderer@^16.13.1:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0"
 
+react-super-responsive-table@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/react-super-responsive-table/-/react-super-responsive-table-5.2.0.tgz#5357c928f7bca7851b3ae3f2e8e7550f7acf5c7d"
+  integrity sha512-gC6QX/+HNt7d5QDvhp83Q8AV8/44mbeRo4Z4UQ9KfBbY9dyHkQZUXRbaWPFp6CHmfSyVlJaRseTHzwMKmJjRKA==
+
 react-test-renderer@^17.0.1:
   version "17.0.1"
   resolved "https://registry.npmjs.org/react-test-renderer/-/react-test-renderer-17.0.1.tgz"
