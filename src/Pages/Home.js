@@ -16,7 +16,7 @@ export default class Home extends Component {
         <button><Link to={"/setup"}>Create a race</Link></button>
         <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
       </div>
-        <img src={logo} alt="Logo" />
+        <img className="running-boy" src={logo} alt="Logo" />
     </div>
 
     )
