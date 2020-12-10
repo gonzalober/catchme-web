@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import map from '../images/runmap.gif';
 import Header from './Header';
-import logo from '../images/logo.gif'
 
 export default class Race extends Component {
   render() {
