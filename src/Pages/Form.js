@@ -26,10 +26,14 @@ export default function RadioButtonsGroup() {
 
   const classes = useStyles();
 
+  const white = {
+    color: 'white',
+  };
+
   return (
     <div>
       <FormControl className="form" component="fieldset">
-        <FormLabel component="legend">Please select distance</FormLabel>
+        <FormLabel style={white} component="legend">Please select distance</FormLabel>
         <RadioGroup aria-label="distance" name="distance1" value={value} onChange={handleChange}>
           <FormControlLabel value="500m" control={<Radio />} label="500m" />
           <FormControlLabel value="1km" control={<Radio />} label="1km" />
@@ -38,8 +42,8 @@ export default function RadioButtonsGroup() {
           <FormControlLabel value="disabled" disabled control={<Radio />} label="(Custom -- Coming soon)" />
         </RadioGroup>
       </FormControl>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="outlined-basic" label="Enter Name" variant="outlined" />
+      <form className={classes.root} noValidate autoComplete="off" color="secondary" >
+        <TextField id="outlined-secondary" label="Enter Name" variant="outlined" color="secondary" />
       </form>
       <Button variant="contained" color="primary">
         Create race
