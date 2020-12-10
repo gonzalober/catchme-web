@@ -9,7 +9,6 @@ export default class Setup extends Component {
       <div className="main-content">
         < Header/>
           <div className="lobby-creation">
-            <h1>CatchMe</h1>
             <p>Race parameters</p>
           </div>
         <Demo />

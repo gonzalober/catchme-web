@@ -9,7 +9,6 @@ export default class Race extends Component {
       <div className="main-content">
         < Header/>
           <div className="race">
-            <h1>CatchMe</h1>
             <img src={map} alt="Map" />
             <h4>Race Details:</h4>
             <p>David</p>
