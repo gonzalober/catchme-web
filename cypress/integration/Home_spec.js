@@ -31,6 +31,25 @@ describe('Homepage Links', function() {
     cy.contains('3 - Start race')
     cy.contains('4 - Race ends')
   })
+
+  it('click link to Create a race loads Create a race page', function() {
+    cy.visit('/')
+    cy.get('button').contains('Create a race').click()
+    cy.contains('CatchMe')
+    cy.contains('Race parameters')
+    cy.get('[alt="Logo"]').should('be.visible')
+  })
+
+  it('click link to Create a race loads Leaderboard', function() {
+    cy.visit('/')
+    cy.get('button').contains('Leaderboard').click()
+    cy.contains('Leaderboard')
+    cy.contains('User')
+    cy.contains('Time')
+    cy.contains('Distance')
+    cy.contains('Date')
+    cy.get('[alt="Logo"]').should('be.visible')
+  })
 })
 
 

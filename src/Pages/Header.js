@@ -10,8 +10,8 @@ export default class Header extends Component {
       <div className="heading">
           <h1>CatchMe</h1>
           <div className="header-icons">
-            <Link to={"/"}> <img src={home} alt="Logo" /></Link>
-            <Link to={"/setup"}> <img src={plus} alt="Logo" /></Link>
+            <Link to={"/"}> <img src={home} alt="home-icon" /></Link>
+            <Link to={"/setup"}> <img src={plus} alt="plus-icon" /></Link>
           </div>
           <img className="logo" src={logo} alt="Logo" />
       </div>
