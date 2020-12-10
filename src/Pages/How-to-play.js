@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import Header from './Header';
 
 export default class HowToPlay extends Component {
   render() {
     return (
       <div className="main-content">
+        < Header/>
         <div className="race-end">
           <h1>How to Play</h1>
             <p>1 - Create race</p>
