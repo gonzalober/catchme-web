@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Header from './Header';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import LeaderTable from './Table';
 
 export default class Leaderboard extends Component {
   render() {
@@ -9,26 +11,7 @@ export default class Leaderboard extends Component {
         < Header/>
           <div className="race-end">
             <h1>Leaderboard</h1>
-            <table>
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>User</th>
-                  <th>Time</th>
-                  <th>Distance</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr key="entries">
-                  <td> 1st </td>
-                  <td> David </td>
-                  <td> 01:54.321 </td>
-                  <td> 1km </td>
-                  <td> 9/12/20 </td>
-                </tr>
-              </tbody>
-            </table>
+            < LeaderTable/>
           </div>
       </div>
     );
