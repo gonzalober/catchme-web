@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Demo from './Form';
+import Form from './Form';
 import Header from './Header';
 import logo from '../images/logo.gif'
 
@@ -11,7 +11,7 @@ export default class Setup extends Component {
           <div className="lobby-creation">
             <p>Race parameters</p>
           </div>
-        <Demo />
+        <Form />
       </div>
     )
   }

@@ -32,7 +32,7 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "coverage": "jest --coverage",
-    "startcy": "my-server -p 3030",
+    "startcy": "my-server -p 3000",
     "cy:run": "cypress run",
     "testcy": "start-server-and-test startcy http://localhost:3000 cy:run"
   },
