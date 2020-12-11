@@ -2,7 +2,6 @@ import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_RACE } from '../graphql/mutations/createRace';
 import { CREATE_USER } from '../graphql/mutations/createUser';
-import { useHistory } from "react-router-dom";
 
 export default function RaceForm() {
   const [distance, setDistance] = React.useState("500");
@@ -26,8 +25,6 @@ export default function RaceForm() {
       },
       variables: { distance: parseInt(distance) } 
     });
-    const history = useHistory();
-    history.push("/");
   }
 
   const handleRadioChange = (event) => {
