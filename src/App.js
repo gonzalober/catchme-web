@@ -9,6 +9,7 @@ import Leaderboard from './Pages/Leaderboard.js';
 import RaceEnd from './Pages/Race-end.js';
 import HowToPlay from './Pages/How-to-play.js';
 import Lobby from './Pages/Lobby.js';
+import Race from './Pages/Race.js';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/race-end"><RaceEnd /></Route>
         <Route exact path="/how-to-play"><HowToPlay /></Route>
         <Route exact path="/Lobby"><Lobby /></Route>
+        <Route exact path="/race"><Race /></Route>
 
     </div>
     </Router>

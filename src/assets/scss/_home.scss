@@ -32,11 +32,13 @@
 
 }
 
-button {
-  font-family: 'Press Start 2P', cursive;
-  display: flex;
-  margin: 11% auto;
-  font-size: 20px;
+.home-buttons {
+  button {
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    margin: 11% auto;
+    font-size: 20px;
+  }
 }
 
 .race-end {
