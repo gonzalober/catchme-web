@@ -11,10 +11,12 @@ export default class Home extends Component {
         <h1>CatchMe</h1>
         <p>The app that keeps you running</p>
       </div>
+      <div className="home-buttons">
         <button><Link to={"/how-to-play"}>How to play</Link></button>
         <button><Link to={"/setup"}>Create a race</Link></button>
         <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
-        <img src={logo} alt="Logo" />
+      </div>
+        <img className="running-boy" src={logo} alt="Logo" />
     </div>
 
     )

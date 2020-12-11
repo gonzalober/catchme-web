@@ -18,8 +18,6 @@ const client = new ApolloClient({
   uri: "https://catchme-server.herokuapp.com/"
 });
 
-
-
 function App() {
   return (  
     <ApolloProvider client={client}>

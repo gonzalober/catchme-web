@@ -1,6 +1,5 @@
 .header {
   text-align: right;
-  color: white;
   width: 100%;
   letter-spacing: 5px;
   text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe,
@@ -32,14 +31,24 @@
 
 }
 
-button {
-  font-family: 'Press Start 2P', cursive;
-  display: flex;
-  margin: 11% auto;
-  font-size: 20px;
+.home-buttons {
+  button {
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    margin: 11% auto;
+    font-size: 20px;
+  }
 }
 
 .race-end {
   color: white;
   text-align: center;
+}
+
+.running-boy{
+  width: 58%;
+}
+
+.lobby-creation {
+  margin-top: 20%;
 }
