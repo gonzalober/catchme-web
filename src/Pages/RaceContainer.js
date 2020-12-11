@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { RACES_QUERY } from '../graphql/races';
+import { RACES_QUERY } from '../graphql/queries/races';
 import { Race } from '../components/Race';
 
 export function RaceContainer() {
