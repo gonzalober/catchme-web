@@ -16,5 +16,6 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": 0,
     "react/react-in-jsx-scope": 0,
+    "react/no-string-refs": 0,
   },
 };

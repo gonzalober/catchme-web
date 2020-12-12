@@ -9,6 +9,9 @@ export const QUERY_RACE = gql`
         id
         username
         position
+        location {
+          startLat
+        }
       }
     }
   }

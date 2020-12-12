@@ -20,14 +20,16 @@ export default function CreateRaceForm() {
         const raceId = mutationResult.data.createRace.id;
 
         createUser({
+          update: (proxy, mutationResult) => {
+            const userId = mutationResult.data.createUser.id;
+            history.push({
+              pathname: './lobby',
+              RaceId: raceId,
+              me: userId,
+            })
+          },
           variables: { username: username, RaceId: raceId  }
         });
-
-        history.push({
-          pathname: './lobby',
-          RaceId: raceId
-        })
-
       },
       variables: { distance: parseInt(distance) }
     });

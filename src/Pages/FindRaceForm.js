@@ -13,13 +13,18 @@ export default function FindRace() {
   function handleFindRace(event) {
     event.preventDefault();
     createUser({
+      update: (proxy, mutationResult) => {
+        const userId = mutationResult.data.createUser.id;
+        history.push({
+          pathname: './lobby',
+          RaceId: parseInt(raceId),
+          me: userId,
+        })
+      },
       variables: { username: username, RaceId: parseInt(raceId) }
     });
 
-    history.push({
-      pathname: './lobby',
-      RaceId: parseInt(raceId)
-    })
+    
 
   }
 
