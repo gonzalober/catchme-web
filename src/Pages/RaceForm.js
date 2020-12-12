@@ -2,29 +2,35 @@ import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_RACE } from '../graphql/mutations/createRace';
 import { CREATE_USER } from '../graphql/mutations/createUser';
+import { useHistory } from "react-router-dom"
 
 export default function RaceForm() {
   const [distance, setDistance] = React.useState("500");
   const [username, setUsername] = React.useState("");
   const [createRace, { loading, error }] = useMutation(CREATE_RACE);
   const [createUser, { loadingUser, userError }] = useMutation(CREATE_USER);
+  const history = useHistory();
 
   function handleCreateRace(event) {
     event.preventDefault();
-    createRace({ 
+    createRace({
       update: (proxy, mutationResult) => {
 
         console.log('raceMutationResult: ', mutationResult);
         const raceId = mutationResult.data.createRace.id;
         // console.log("raceid:", mutationResult.data.createRace.id);
 
-        createUser({ 
-          variables: { username: username, RaceId: raceId  } 
+        createUser({
+          variables: { username: username, RaceId: raceId  }
         });
 
       },
-      variables: { distance: parseInt(distance) } 
+      variables: { distance: parseInt(distance) }
     });
+  }
+
+  const handleClick = () => {
+    history.push('./Lobby')
   }
 
   const handleRadioChange = (event) => {
@@ -44,9 +50,7 @@ export default function RaceForm() {
       <div onChange={handleNameChange}>
         <input type="text" defaultValue=""/>
       </div>
-      <input type="submit" value="Create Race"/>
+      <input onClick={handleClick} type="submit" value="Create Race"/>
     </form>
   );
 }
-
-
