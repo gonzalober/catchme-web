@@ -30,11 +30,11 @@ export default function RaceForm() {
   }
 
   const handleClick = () => {
-    history.push('./Lobby') 
+    history.push('./Lobby')
   }
 
   const handleRadioChange = (event) => {
-    setDistance(event.target.value);
+    setDistance(event.target.value); 
   };
 
   const handleNameChange = (event) => {
@@ -43,9 +43,11 @@ export default function RaceForm() {
 
   return (
     <form onSubmit={handleCreateRace}>
-      <div onChange={handleRadioChange}>
+      <div onChange={handleRadioChange} className="buttons">
         <input type="radio" value="500" name="distance"/> 500m
         <input type="radio" value="1000" name="distance"/> 1000m
+        <input type="radio" value="1500" name="distance"/> 1500m
+        <input type="radio" value="2000" name="distance"/> 2000m
       </div>
       <div onChange={handleNameChange}>
         <input type="text" defaultValue=""/>
