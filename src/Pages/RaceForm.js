@@ -30,7 +30,7 @@ export default function RaceForm() {
   }
 
   const handleClick = () => {
-    history.push('./Lobby')
+    history.push('./Lobby') 
   }
 
   const handleRadioChange = (event) => {
