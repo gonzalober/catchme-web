@@ -4,7 +4,7 @@ import { CREATE_RACE } from '../graphql/mutations/createRace';
 import { CREATE_USER } from '../graphql/mutations/createUser';
 import { useHistory } from "react-router-dom"
 
-export default function RaceForm() {
+export default function CreateRaceForm() {
   const [distance, setDistance] = React.useState("500");
   const [username, setUsername] = React.useState("");
   const [createRace, { loading, error }] = useMutation(CREATE_RACE);
@@ -15,22 +15,22 @@ export default function RaceForm() {
     event.preventDefault();
     createRace({
       update: (proxy, mutationResult) => {
-
-        console.log('raceMutationResult: ', mutationResult);
+        // dont delete this comment!
+        // console.log('raceMutationResult: ', mutationResult);
         const raceId = mutationResult.data.createRace.id;
-        // console.log("raceid:", mutationResult.data.createRace.id);
 
         createUser({
           variables: { username: username, RaceId: raceId  }
         });
 
+        history.push({
+          pathname: './lobby',
+          RaceId: raceId
+        })
+
       },
       variables: { distance: parseInt(distance) }
     });
-  }
-
-  const handleClick = () => {
-    history.push('./Lobby') 
   }
 
   const handleRadioChange = (event) => {
@@ -50,7 +50,7 @@ export default function RaceForm() {
       <div onChange={handleNameChange}>
         <input type="text" defaultValue=""/>
       </div>
-      <input onClick={handleClick} type="submit" value="Create Race"/>
+      <input type="submit" value="Create Race"/>
     </form>
   );
 }

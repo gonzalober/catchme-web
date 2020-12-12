@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import CreateRaceForm from './CreateRaceForm';
+import FindRaceForm from './FindRaceForm';
 import Header from './Header';
 import logo from '../images/logo.gif'
 
-export default class CreateRace extends Component {
+export default class FindRace extends Component {
   render() {
     return (
       <div className="main-content">
         <Header/>
-          <div className="lobby-creation">
-            <p>Race parameters</p>
+          <div className="race-finder">
+            <p>Race Finder</p>
           </div>
-        <CreateRaceForm />
+        <FindRaceForm />
       </div>
     )
   }
