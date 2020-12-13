@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import Header from "./Header";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
+import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 
 export default function Lobby() {
   const location = useLocation();
@@ -11,7 +12,8 @@ export default function Lobby() {
     variables: { id: location.RaceId },
     pollInterval: 2000,
   });
-  const [createLocation, { loading, error }] = useMutation(CREATE_LOCATION);
+  const [createLocation] = useMutation(CREATE_LOCATION);
+  const [updateRaceStartTime] = useMutation(UPDATE_RACE_START_TIME);
   const history = useHistory();
 
   console.log(race);
@@ -27,6 +29,16 @@ export default function Lobby() {
       }
     }
     if (readyCounter === race.users.length) {
+      //give the race a start time
+      updateRaceStartTime({
+        variables: {
+          id: location.RaceId,
+          startTime: Date.now(),
+        },
+        refetchQueries: [
+          { query: QUERY_RACE, variables: { id: location.RaceId } },
+        ],
+      });
       history.push({
         pathname: "./race",
         RaceId: race.id,

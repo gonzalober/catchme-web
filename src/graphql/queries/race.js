@@ -5,12 +5,18 @@ export const QUERY_RACE = gql`
     race(id: $id) {
       id
       distance
+      startTime
+      endTime
       users {
         id
         username
         position
         location {
           startLat
+          startLong
+          endLat
+          endLong
+          distance
         }
       }
     }
