@@ -42,17 +42,17 @@ export default function RaceForm() {
   };
 
   return (
-    <form onSubmit={handleCreateRace}>
-      <div onChange={handleRadioChange} className="formm">
-        <label className="radio"><input type="radio" value="500" name="distance"/><span> 500m</span></label>
-        <label className="radio"><input type="radio" value="1000" name="distance"/><span> 1000m</span></label>
-        <label className="radio"><input type="radio" value="1500" name="distance"/><span> 1500m</span></label>
-        <label className="radio"><input type="radio" value="2000" name="distance"/><span> 2000m</span></label>
-      </div>
-      <div onChange={handleNameChange}>
-        <input type="text" defaultValue="" placeholder="User Name:"/>
-      </div>
-      <input onClick={handleClick} type="submit" value="Create Race"/>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleCreateRace} onChange={handleRadioChange} className="form">
+          <label className="radio"><input type="radio" value="500" name="distance"/><span> 500m</span></label>
+          <label className="radio"><input type="radio" value="1000" name="distance"/><span> 1000m</span></label>
+          <label className="radio"><input type="radio" value="1500" name="distance"/><span> 1500m</span></label>
+          <label className="radio"><input type="radio" value="2000" name="distance"/><span> 2000m</span></label>
+        <div onChange={handleNameChange}>
+          <input type="text" defaultValue="" placeholder="User Name:"/>
+        </div>
+        <input className="form-submit" onClick={handleClick} type="submit" value="Create Race"/>
+      </form>
+    </div>
   );
 }
