@@ -128,7 +128,7 @@ export default function DistanceCalculator() {
       }
       dist = Math.acos(dist);
       dist = dist * 180/Math.PI;
-      dist = dist * 60 * 1.1515;
+      dist = dist * 60 * 1.1515 * 1609.344;
       return dist;
     }
   }
