@@ -43,14 +43,14 @@ export default function RaceForm() {
 
   return (
     <form onSubmit={handleCreateRace}>
-      <div onChange={handleRadioChange} className="buttons">
-        <input type="radio" value="500" name="distance"/> 500m
-        <input type="radio" value="1000" name="distance"/> 1000m
-        <input type="radio" value="1500" name="distance"/> 1500m
-        <input type="radio" value="2000" name="distance"/> 2000m
+      <div onChange={handleRadioChange} className="formm">
+        <label className="radio"><input type="radio" value="500" name="distance"/><span> 500m</span></label>
+        <label className="radio"><input type="radio" value="1000" name="distance"/><span> 1000m</span></label>
+        <label className="radio"><input type="radio" value="1500" name="distance"/><span> 1500m</span></label>
+        <label className="radio"><input type="radio" value="2000" name="distance"/><span> 2000m</span></label>
       </div>
       <div onChange={handleNameChange}>
-        <input type="text" defaultValue=""/>
+        <input type="text" defaultValue="" placeholder="User Name:"/>
       </div>
       <input onClick={handleClick} type="submit" value="Create Race"/>
     </form>
