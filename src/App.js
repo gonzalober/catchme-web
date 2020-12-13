@@ -24,7 +24,7 @@ const client = new ApolloClient({
 });
 
 function App() {
-  return (  
+  return (
     <ApolloProvider client={client}>
       <Router>
         <div className="container">
