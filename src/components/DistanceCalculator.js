@@ -14,13 +14,19 @@ export default function DistanceCalculator() {
   });
 
   const { data: { user } = {} } = useQuery(QUERY_USER, {
-    variables: { id: location.me }
+    variables: { id: location.me },
+    onCompleted: () => {
+      const runUpdater = () => {
+        let myEndLat = user.location.endLat;
+        let myEndLong = user.location.endLong;
+        let myDistance = user.location.distance;
+        setInterval(updateDistanceAndLocation, 5000);
+      } 
+    }
   })
 
   //takes your initial coordinates
-  let myEndLat = user.location.endLat;
-  let myEndLong = user.location.endLong;
-  let myDistance = user.location.distance;
+  
 
   const updateDistanceAndLocation = () => {
     //what we need instead:
@@ -30,8 +36,8 @@ export default function DistanceCalculator() {
       (data) => {
         console.log(data);
         //new coordinates
-        currentLat = data.coords.latitude;
-        currentLong = data.coords.longitude;
+        let currentLat = data.coords.latitude;
+        let currentLong = data.coords.longitude;
         console.log(currentLat);
         console.log(currentLong);
         //distance calculation -> should give some number
@@ -65,7 +71,7 @@ export default function DistanceCalculator() {
     );
   }
 
-  const runUpdater = setInterval(updateDistanceAndLocation, 5000);
+  
 
 
 
