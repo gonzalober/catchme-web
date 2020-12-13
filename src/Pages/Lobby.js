@@ -1,9 +1,9 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import Header from './Header';
-import { QUERY_RACE } from '../graphql/queries/race';
-import { CREATE_LOCATION } from '../graphql/mutations/createLocation';
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import Header from "./Header";
+import { QUERY_RACE } from "../graphql/queries/race";
+import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 
 export default function Lobby() {
   const location = useLocation();
@@ -47,77 +47,103 @@ export default function Lobby() {
   //   //when everybody is ready,
   //   //send a request to start race
 
-  
-
   const checkReady = () => {
     setTimeout(setInterval(checkStartLocations, 1000), 3000);
-  }
+  };
 
   const checkStartLocations = () => {
     let i;
     let readyCounter = 0;
-    for( i=0; i < race.users.length; i++ ) {
-      if(race.users[i].location != null) {
-        readyCounter ++;
+    for (i = 0; i < race.users.length; i++) {
+      if (race.users[i].location != null) {
+        readyCounter++;
       }
     }
-    if(readyCounter === race.users.length) {
+    if (readyCounter === race.users.length) {
       history.push({
-        pathname: './race',
+        pathname: "./race",
         RaceId: race.id,
         me: location.me,
-      })
+      });
     } else {
       console.log("counter:", readyCounter);
       readyCounter = 0;
     }
   };
+  let lat;
+  let lng;
+  const handleReady = (param) => (e) => {
+    e.preventDefault();
+    var getPosition = () => {
+      return new Promise(() => {
+        navigator.geolocation.getCurrentPosition(
+          (data) => {
+            console.log(data);
+            lat = data.coords.latitude;
+            lng = data.coords.longitude;
+            console.log(lat);
+            console.log(lng);
+          },
+          (error) => console.log(error),
+          {
+            enableHighAccuracy: true,
+          }
+        );
+      });
+    };
+    getPosition()
+      .then(() => {
+        console.log(typeof lat);
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
 
-  const handleReady = param => e => {
-    event.preventDefault();
-    const startLat = 51.510357;
-    const startLong = -0.116773;
+    const startLat = lat;
+    console.log(typeof startLat);
+    const startLong = lng;
     const distance = 0;
-    createLocation({
-      variables: {
-        startLat: startLat,
-        startLong: startLong,
-        endLat: startLat,
-        endLong: startLong,
-        distance: distance,
-        UserId: param,
-      },
-      refetchQueries: [
-        { query: QUERY_RACE,
-          variables: { id: location.RaceId }
-        }
-      ],
-      onCompleted: checkReady(),
-    })
+    // createLocation({
+    //   variables: {
+    //     startLat: startLat,
+    //     startLong: startLong,
+    //     endLat: startLat,
+    //     endLong: startLong,
+    //     distance: distance,
+    //     UserId: param,
+    //   },
+    //   refetchQueries: [
+    //     { query: QUERY_RACE, variables: { id: location.RaceId } },
+    //   ],
+    //   onCompleted: checkReady(),
+    // });
   };
 
   return (
     <div className="main-content">
-      <Header/>
+      <Header />
       <div className="lobby-page">
         <h1>Lobby</h1>
-          <p>Code: {race && race.id}</p>
-          <p>Distance: {race && race.distance}m</p>
-          <p>Participants:</p>
-          <ol>
-            {race && race.users && race.users.map(user => 
-                <li key={ user.id } >
+        <p>Code: {race && race.id}</p>
+        <p>Distance: {race && race.distance}m</p>
+        <p>Participants:</p>
+        <ol>
+          {race &&
+            race.users &&
+            race.users.map((user) => (
+              <li key={user.id}>
                 {user.username}
-                {user.id === location.me ?
+                {user.id === location.me ? (
                   <button onClick={handleReady(user.id)}>Ready!</button>
-                  : null  
-                }
-                </li>
-            )}
-          </ol>
-          <button></button>
-          <button><Link to={"/race"}>Start Race</Link></button>
-      </div>  
+                ) : null}
+              </li>
+            ))}
+        </ol>
+        <button></button>
+        <button>
+          <Link to={"/race"}>Start Race</Link>
+        </button>
+      </div>
     </div>
-  )
+  );
 }
