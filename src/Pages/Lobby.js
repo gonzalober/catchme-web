@@ -70,39 +70,46 @@ export default function Lobby() {
       readyCounter = 0;
     }
   };
+
   let lat;
   let lng;
   const handleReady = (param) => (e) => {
-    e.preventDefault();
-    var getPosition = () => {
-      return new Promise(() => {
-        navigator.geolocation.getCurrentPosition(
-          (data) => {
-            console.log(data);
-            lat = data.coords.latitude;
-            lng = data.coords.longitude;
-            console.log(lat);
-            console.log(lng);
+    // e.preventDefault();
+   
+    navigator.geolocation.getCurrentPosition(
+      (data) => {
+        console.log(data);
+        lat = data.coords.latitude;
+        lng = data.coords.longitude;
+        console.log(lat);
+        console.log(lng);
+        createLocation({
+          variables: {
+            startLat: lat,
+            startLong: lng,
+            endLat: lat,
+            endLong: lng,
+            distance: 0,
+            UserId: param,
           },
-          (error) => console.log(error),
-          {
-            enableHighAccuracy: true,
-          }
-        );
-      });
-    };
-    getPosition()
-      .then(() => {
-        console.log(typeof lat);
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
+          refetchQueries: [
+            { query: QUERY_RACE, variables: { id: location.RaceId } },
+          ],
+          onCompleted: checkReady(),
+        });
+      },
+      (error) => console.log(error),
+      {
+        enableHighAccuracy: true,
+      }
+    );
+    
 
-    const startLat = lat;
-    console.log(typeof startLat);
-    const startLong = lng;
-    const distance = 0;
+
+    // const startLat = lat;
+    // console.log(typeof startLat);
+    // const startLong = lng;
+    // const distance = 0;
     // createLocation({
     //   variables: {
     //     startLat: startLat,
