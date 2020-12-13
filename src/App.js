@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from "react-router-dom";
-import Setup from './Pages/Race-setup.js'
+import CreateRace from './Pages/CreateRace.js'
 import Home from './Pages/Home.js';
 import Leaderboard from './Pages/Leaderboard.js';
 import RaceEnd from './Pages/Race-end.js';
@@ -25,7 +25,7 @@ function App() {
         <div className="container">
           <Route exact path="/"><Home /></Route>
           <Route exact path="/races"><RaceContainer /></Route>
-          <Route exact path="/setup"><Setup /></Route>
+          <Route exact path="/createrace"><CreateRace /></Route>
           <Route exact path="/leaderboard"><Leaderboard /></Route>
           <Route exact path="/race-end"><RaceEnd /></Route>
           <Route exact path="/how-to-play"><HowToPlay /></Route>
