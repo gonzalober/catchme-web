@@ -81,7 +81,9 @@ export default function DistanceCalculator() {
         console.log("New end long:", startLong);
         console.log("Distance is: ", newDistance);
         console.log("Location id is:", id);
-        updateDistanceAndLocation(startLat, startLong, newDistance, id);
+        setTimeout(function() {
+          updateDistanceAndLocation(startLat, startLong, newDistance, id);
+        }, 3000)
       },
       (error) => console.log(error),
       {
