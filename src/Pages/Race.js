@@ -19,19 +19,19 @@ function Race() {
   function query() {
     let users = ["Kiril", "David", "Mace", "Gonzalo"]
     if(users.length === 1) {
-      return <div>{users[0]}<ProgressBar bgcolor={"blue"} completed={completed1}/></div>
+      return <div>{users[0]}<ProgressBar bgcolor={"white"} completed={completed1}/></div>
     } else if(users.length === 2) {
-      return <div>{users[0]}<ProgressBar bgcolor={"blue"} completed={completed1}/>
-      {users[1]}<ProgressBar bgcolor={"red"} completed={completed2}/></div>
+      return <div>{users[0]}<ProgressBar bgcolor={"white"} completed={completed1}/>
+      {users[1]}<ProgressBar bgcolor={"white"} completed={completed2}/></div>
     } else if(users.length === 3) {
-      return <div>{users[0]}<ProgressBar bgcolor={"blue"} completed={completed1}/>
-      {users[1]}<ProgressBar bgcolor={"red"} completed={completed2}/>
-      {users[2]}<ProgressBar bgcolor={"orange"} completed={completed3}/></div>
+      return <div>{users[0]}<ProgressBar bgcolor={"white"} completed={completed1}/>
+      {users[1]}<ProgressBar bgcolor={"white"} completed={completed2}/>
+      {users[2]}<ProgressBar bgcolor={"white"} completed={completed3}/></div>
     } else if(users.length == 4) {
-      return <div>{users[0]}<ProgressBar bgcolor={"blue"} completed={completed1}/>
-      {users[1]}<ProgressBar bgcolor={"red"} completed={completed2}/>
-      {users[2]}<ProgressBar bgcolor={"orange"} completed={completed3}/>
-      {users[3]}<ProgressBar bgcolor={"green"} completed={completed4}/></div>
+      return <div>{users[0]}<ProgressBar bgcolor={"white"} completed={completed1}/>
+      {users[1]}<ProgressBar bgcolor={"white"} completed={completed2}/>
+      {users[2]}<ProgressBar bgcolor={"white"} completed={completed3}/>
+      {users[3]}<ProgressBar bgcolor={"white"} completed={completed4}/></div>
     }
   }
 
