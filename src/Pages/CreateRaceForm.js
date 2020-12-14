@@ -14,12 +14,12 @@ export default function CreateRaceForm() {
   function handleCreateRace(event) {
     event.preventDefault();
     createRace({
-      update: (proxy, mutationResult) => { 
+      update: (proxy, mutationResult) => {
         // dont delete this comment!
         // console.log('raceMutationResult: ', mutationResult);
         const raceId = mutationResult.data.createRace.id;
 
-        createUser({ 
+        createUser({
           update: (proxy, mutationResult) => {
             const userId = mutationResult.data.createUser.id;
             history.push({
