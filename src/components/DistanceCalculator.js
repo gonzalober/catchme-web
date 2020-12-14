@@ -3,122 +3,20 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { QUERY_USER } from "../graphql/queries/user";
-// import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
+import { UPDATE_LOCATION } from "../graphql/mutations/updateLocation";
+import { QUERY_LOCATION } from "../graphql/queries/location";
 // import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
-
 export default function DistanceCalculator() {
+  const [dist, setDist] = React.useState(null);
   const location = useLocation();
-  const { data: { race } = {} } = useQuery(QUERY_RACE, {
-    variables: { id: location.RaceId },
-    pollInterval: 2000,
-  });
+  const history = useHistory();
+  let myEndLat = location.myEndLat;
+  let myEndLong = location.myEndLong;
+  let myDistance = location.myDistance;
+  let myLocId = location.myLocId;
+  let newDistance;
+  // console.log("Details:", myEndLat, myEndLong, myDistance, myLocId, location.me, location.RaceId);
 
-  const { data: { user } = {} } = useQuery(QUERY_USER, {
-    variables: { id: location.me },
-    onCompleted: () => {
-      const runUpdater = () => {
-        let myEndLat = user.location.endLat;
-        let myEndLong = user.location.endLong;
-        let myDistance = user.location.distance;
-        setInterval(updateDistanceAndLocation, 5000);
-      } 
-    }
-  })
-
-  //takes your initial coordinates
-  
-
-  const updateDistanceAndLocation = () => {
-    //what we need instead:
-    //get the 
-    //then we get new coordinates
-    navigator.geolocation.getCurrentPosition(
-      (data) => {
-        console.log(data);
-        //new coordinates
-        let currentLat = data.coords.latitude;
-        let currentLong = data.coords.longitude;
-        console.log(currentLat);
-        console.log(currentLong);
-        //distance calculation -> should give some number
-        myDistance += distance(myEndLat, myEndLong, currentLat, currentLong)
-        //update the users location in db
-        updateLocation({
-          variables: {
-            startLat: myEndLat,
-            startLong: myEndLong,
-            endLat: currentLat,
-            endLong: currentLong,
-            distance: myDistance,
-            UserId: user.id,
-          },
-          refetchQueries: [
-            { query: QUERY_RACE, variables: { id: location.RaceId } },
-          ],
-        });
-        console.log("Old end lat:", myEndLat);
-        console.log("Old end long:", myEndLong);
-        myEndLat = currentLat;
-        myEndLong = currentLong;
-        console.log("New end lat:", myEndLat);
-        console.log("New end long:", myEndLong);
-        console.log("Distance is: ", myDistance);
-      },
-      (error) => console.log(error),
-      {
-        enableHighAccuracy: true,
-      }
-    );
-  }
-
-  
-
-
-
-
-
-  // race {
-  //   id
-  //   ...
-  //   users {
-  //     [
-  //       id 
-  //       username
-  //       location {
-  //         4.345.3535435
-  //         4535346356
-  //         35345345
-  //         345345
-  //       }
-  //     ]
-  //   }
-  // }
-
-  //how to initially get access to our location object that belongs to some user (in db)
-  //we find user where user.id === location.me
-  //we update this users location
-
-
-  //query current loc -> location
-  //let startLat = location.endLat
-  //let startLong = location.endLong
-  //get new location of user 
-  //let endLat = data.coords.latitude
-  //let endLong = data.coords.longitude
-  //calculate distance
-  //start and end 
-  //update the position of user
-  // updateLocation({
-  //   variables: {
-  //     startLat: startLat,
-  //     startLong: startLong,
-  //     endLat: endLat,
-  //     endLong: endLong,
-  //     distance: whater we calcualte
-  //   }
-  // })
-
-  
   function distance(lat1, lon1, lat2, lon2) {
     if ((lat1 == lat2) && (lon1 == lon2)) {
       return 0;
@@ -139,10 +37,72 @@ export default function DistanceCalculator() {
     }
   }
 
-  
+  const [updateLocation] = useMutation(UPDATE_LOCATION);
+  const { data: { race } = {} } = useQuery(QUERY_RACE, {
+    variables: { id: location.RaceId },
+    pollInterval: 2000,
+    onCompleted: async () => {
+      await updateDistanceAndLocation(myEndLat, myEndLong, myDistance, myLocId);
+    }
+  });
+
+  //TO BE DELETED LATE BUT KEEP NOW FOR TRSTING
+  const { data: { loc } = {} } = useQuery(QUERY_LOCATION, {
+    variables: { id: location.myLocId },
+    // pollInterval: 2000,
+    onCompleted: async () => {
+      await console.log(loc)
+    }
+    
+  });
+  //--------------------------
+
+  const updateDistanceAndLocation = (lat, long, dist, id) => {
+    navigator.geolocation.getCurrentPosition(
+      (data) => {
+        console.log(data);
+        //new coordinates
+        let currentLat = data.coords.latitude;
+        let currentLong = data.coords.longitude;
+        console.log(currentLat);
+        console.log(currentLong);
+        //distance calculation -> should give some number
+        newDistance = dist + distance(lat, long, currentLat, currentLong);
+        setDist(newDistance);
+        //update the users location in db
+        updateLocation({
+          variables: {
+            id: id,
+            startLat: lat,
+            startLong: long,
+            endLat: currentLat,
+            endLong: currentLong,
+            distance: newDistance,
+          },
+          refetchQueries: [
+            { query: QUERY_RACE, variables: { id: location.RaceId } },
+            { query: QUERY_LOCATION, variables: { id: location.myLocId } },
+          ],
+        });
+        console.log("Old end lat:", lat);
+        console.log("Old end long:", long);
+        let startLat = currentLat;
+        let startLong = currentLong;
+        console.log("New end lat:", startLat);
+        console.log("New end long:", startLong);
+        console.log("Distance is: ", newDistance);
+        console.log("Location id is:", id);
+        updateDistanceAndLocation(startLat, startLong, newDistance, id)
+      },
+      (error) => console.log(error),
+      {
+        enableHighAccuracy: true,
+      }
+    );
+  }
   return (
     <div>
-      <p>Distance calculator</p>
+      <p>Distance: {dist}</p>
     </div>
   )
 }
