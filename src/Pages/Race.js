@@ -1,7 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
 import Header from './Header';
+import Timer from '../components/Timer'
+import DistanceCalculator from '../components/DistanceCalculator';
 import ProgressBar from './ProgressBar.js'
-
 
 function Race() {
   const [completed, setCompleted] = useState(0);
@@ -16,17 +17,25 @@ function Race() {
     setInterval(() => setCompleted4(Math.floor(Math.random() * 100) + 1), 2000);
   }, []);
 
-    return (
-      <div className="main-content">
-        < Header/>
-          <div className="race">
-           <lable>Kiril <ProgressBar bgcolor={"blue"} completed={completed} /></lable>
-            David <ProgressBar bgcolor={"red"} completed={completed2} />
-            Mace <ProgressBar bgcolor={"green"} completed={completed3} />
-            Gonzalo <ProgressBar bgcolor={"orange"} completed={completed4} /> 
-          </div>
-      </div>
-    )
-  }
+
+  return (
+    <div className="main-content">
+      <Header/>
+      <Timer/>
+      <DistanceCalculator/>
+        <div className="race">
+         <lable>Kiril <ProgressBar bgcolor={"blue"} completed={completed} /></lable>
+          David <ProgressBar bgcolor={"red"} completed={completed2} />
+          Mace <ProgressBar bgcolor={"green"} completed={completed3} />
+          Gonzalo <ProgressBar bgcolor={"orange"} completed={completed4} /> 
+        </div>
+    </div>
+  )
+}
+
+
+
+
 
 export default Race;
+

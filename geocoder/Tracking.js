@@ -54,32 +54,21 @@ export default function Lobby() {
   const handleReady = (param) => (e) => {
     e.preventDefault();
     const start = document.querySelector("#start");
-    const stop = document.querySelector("#stop");
-    const coordinates = [];
-    start.addEventListener("click", () => {
-      navigator.geolocation.watchPosition(
-        (data) => {
-          console.log(data);
-          coordinates.push([data.coords.latitude, data.coords.longitude]);
-          window.localStorage.setItem(
-            "coordinates",
-            JSON.stringify(coordinates)
-          );
-          console.log("----");
-          console.log(coordinates);
-          lat = coordinates[0][0];
-          lng = coordinates[0][1];
-          // endlat = coordinates[+1][0];
-          // endlng = coordinates[+1][1];
-          console.log(lat);
-          console.log(lng);
-        },
-        (error) => console.log(error),
-        {
-          enableHighAccuracy: true,
-        }
-      );
-    });
+
+    navigator.geolocation.getCurrentPosition(
+      (data) => {
+        console.log(data);
+        lat = data.coords.latitude;
+        lng = data.coords.longitude;
+        console.log(lat);
+        console.log(lng);
+      },
+      (error) => console.log(error),
+      {
+        enableHighAccuracy: true,
+      }
+    );
+
     const startLat = lat;
     const startLong = lng;
     const distance = 0;
