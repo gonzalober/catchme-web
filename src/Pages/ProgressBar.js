@@ -1,5 +1,7 @@
 import React from "react";
 import runner from "../images/stickperson.gif";
+import PropTypes from 'prop-types';
+
 
 const ProgressBar = (props) => {
   const { bgcolor, completed } = props;
@@ -34,6 +36,11 @@ const ProgressBar = (props) => {
       </div>
     </div>
   );
+};
+
+ProgressBar.propTypes = {
+  bgcolor: PropTypes.string,
+  completed: PropTypes.number,
 };
 
 export default ProgressBar;

@@ -16,6 +16,7 @@ function Race() {
     setInterval(() => setCompleted4(Math.floor(Math.random() * 100) + 1), 2000);
   }, []);
 
+
   function query() {
     let users = ["Kiril", "David", "Mace", "Gonzalo"]
     if(users.length === 1) {
@@ -35,14 +36,23 @@ function Race() {
     }
   }
 
-    return (
-      <div className="main-content">
-        < Header/>
-          <div className="race">
-            {query()}
-          </div>
-      </div>
-    )
-  }
+
+
+  return (
+    <div className="main-content">
+      <Header/>
+      <Timer/>
+      <DistanceCalculator/>
+        <div className="race">
+         {query()}
+        </div>
+    </div>
+  )
+}
+
+
+
+
+
 
 export default Race;

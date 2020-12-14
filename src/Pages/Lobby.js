@@ -5,7 +5,6 @@ import Header from "./Header";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
-
 export default function Lobby() {
   const location = useLocation();
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
@@ -15,11 +14,9 @@ export default function Lobby() {
   const [createLocation] = useMutation(CREATE_LOCATION);
   const [updateRaceStartTime] = useMutation(UPDATE_RACE_START_TIME);
   const history = useHistory();
-
   console.log(race);
   console.log("race:", location.RaceId);
   console.log("user:", location.me);
-
   const checkReady = () => {
     let i;
     let readyCounter = 0;
@@ -35,22 +32,29 @@ export default function Lobby() {
           id: location.RaceId,
           startTime: Date.now(),
         },
-        refetchQueries: [
-          { query: QUERY_RACE, variables: { id: location.RaceId } },
-        ],
-      });
-      history.push({
-        pathname: "./race",
-        RaceId: race.id,
-        me: location.me,
+        update: (proxy, mutationResult) => {
+          //get my location
+          for (i = 0; i < race.users.length; i++) {
+            if(race.users[i].id === location.me) {
+              console.log("DETAILS:", race.users[i].location.endLat,race.users[i].location.endLong,race.users[i].location.distance,race.users[i].location.id)
+              history.push({
+                pathname: "./race",
+                RaceId: race.id,
+                me: location.me,
+                myEndLat: race.users[i].location.endLat,
+                myEndLong: race.users[i].location.endLong,
+                myDistance: race.users[i].location.distance,
+                myLocId: race.users[i].location.id,
+              });
+            }
+          }
+        },
       });
     } else {
       console.log("Not everyone is ready yet!");
       readyCounter = 0;
     }
   };
-
-
   let lat;
   let lng;
   const handleReady = (param) => (e) => {
@@ -74,7 +78,6 @@ export default function Lobby() {
           refetchQueries: [
             { query: QUERY_RACE, variables: { id: location.RaceId } },
           ],
-          onCompleted: checkReady(),
         });
       },
       (error) => console.log(error),
@@ -83,7 +86,6 @@ export default function Lobby() {
       }
     );
   };
-
   return (
     <div className="main-content">
       <Header />
