@@ -1,4 +1,5 @@
 import React from "react";
+import kiril from "../images/Kiril.png";
 
 const ProgressBar = (props) => {
   const { bgcolor, completed } = props;
@@ -29,7 +30,7 @@ const ProgressBar = (props) => {
   return (
     <div style={containerStyles}>
       <div style={fillerStyles}>
-        <span style={labelStyles}>{`${completed}%`}</span>
+        <span style={labelStyles}><img src={kiril} className="kiril-head" alt="home-icon" /></span>
       </div>
     </div>
   );
