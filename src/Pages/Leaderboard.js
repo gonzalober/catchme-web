@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import LeaderTable from './Table';
+import Header from '../components/Header';
+import LeaderTable from '../components/LeaderTable';
 
 export default class Leaderboard extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class Leaderboard extends Component {
         < Header/>
           <div className="race-end">
             <h1>Leaderboard</h1>
-            < LeaderTable/>
+            <LeaderTable/>
           </div>
       </div>
     );

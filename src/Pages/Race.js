@@ -1,7 +1,9 @@
 import React, { Component, useState, useEffect } from 'react';
 import map from '../images/runmap.gif';
-import Header from './Header';
-import ProgressBar from './ProgressBar.js'
+import Header from '../components/Header';
+import ProgressBar from '../components/ProgressBar.js';
+import Timer from '../components/Timer';
+import DistanceCalculator from '../components/DistanceCalculator';
 
 function Race() {
   const [completed1, setCompleted1] = useState(1);

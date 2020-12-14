@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import Header from "./Header";
+import Header from "../components/Header";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CreateRaceForm from './CreateRaceForm';
-import Header from './Header';
-import Footer from './Footer'
+import CreateRaceForm from '../components/CreateRaceForm';
+import Header from '../components/Header';
+import Footer from '../components/Footer'
 
 export default class CreateRace extends Component {
   render() {

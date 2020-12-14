@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FindRaceForm from './FindRaceForm';
-import Header from './Header';
+import FindRaceForm from '../components/FindRaceForm';
+import Header from '../components/Header';
 import logo from '../images/logo.gif'
 
 export default class FindRace extends Component {

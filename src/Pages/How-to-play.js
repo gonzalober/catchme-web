@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default class HowToPlay extends Component {
   render() {
@@ -14,7 +14,7 @@ export default class HowToPlay extends Component {
           <p>3 - Start race</p>
           <p>4 - Race ends</p>
         </div>
-        < Footer />
+        <Footer />
       </div>
     )
   }

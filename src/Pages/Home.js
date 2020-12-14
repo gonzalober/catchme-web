@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../images/logo.gif'
 import {Link} from 'react-router-dom';
-import Footer from './Footer'
+import Footer from '../components/Footer'
 
 
 export default class Home extends Component {
@@ -19,7 +19,7 @@ export default class Home extends Component {
         <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
         <img className="running-boy" src={logo} alt="Logo" />
       </div>
-      < Footer />
+      <Footer />
     </div>
 
     )

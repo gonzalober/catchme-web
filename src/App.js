@@ -7,7 +7,6 @@ import FindRace from "./Pages/FindRace.js";
 import Leaderboard from "./Pages/Leaderboard.js";
 import Lobby from "./Pages/Lobby.js";
 import Race from "./Pages/Race.js";
-import { RaceContainer } from "./Pages/RaceContainer";
 import RaceEnd from "./Pages/Race-end.js";
 
 import ApolloClient from "apollo-boost";
@@ -43,9 +42,6 @@ function App() {
           </Route>
           <Route exact path="/race">
             <Race />
-          </Route>
-          <Route exact path="/races">
-            <RaceContainer />
           </Route>
           <Route exact path="/race-end">
             <RaceEnd />
