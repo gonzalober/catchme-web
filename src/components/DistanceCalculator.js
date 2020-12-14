@@ -7,6 +7,7 @@ import { UPDATE_LOCATION } from "../graphql/mutations/updateLocation";
 import { QUERY_LOCATION } from "../graphql/queries/location";
 // import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 export default function DistanceCalculator() {
+  const [dist, setDist] = React.useState(null);
   const location = useLocation();
   const history = useHistory();
   let myEndLat = location.myEndLat;
@@ -48,7 +49,7 @@ export default function DistanceCalculator() {
   //TO BE DELETED LATE BUT KEEP NOW FOR TRSTING
   const { data: { loc } = {} } = useQuery(QUERY_LOCATION, {
     variables: { id: location.myLocId },
-    pollInterval: 2000,
+    // pollInterval: 2000,
     onCompleted: async () => {
       await console.log(loc)
     }
@@ -66,7 +67,8 @@ export default function DistanceCalculator() {
         console.log(currentLat);
         console.log(currentLong);
         //distance calculation -> should give some number
-        newDistance = dist + distance(lat, long, currentLat, currentLong)
+        newDistance = dist + distance(lat, long, currentLat, currentLong);
+        setDist(newDistance);
         //update the users location in db
         updateLocation({
           variables: {
@@ -79,6 +81,7 @@ export default function DistanceCalculator() {
           },
           refetchQueries: [
             { query: QUERY_RACE, variables: { id: location.RaceId } },
+            { query: QUERY_LOCATION, variables: { id: location.myLocId } },
           ],
         });
         console.log("Old end lat:", lat);
@@ -99,7 +102,7 @@ export default function DistanceCalculator() {
   }
   return (
     <div>
-      <p>Distance: {loc && loc.distance}</p>
+      <p>Distance: {dist}</p>
     </div>
   )
 }
