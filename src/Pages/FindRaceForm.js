@@ -24,7 +24,7 @@ export default function FindRace() {
       variables: { username: username, RaceId: parseInt(raceId) }
     });
 
-    
+
 
   }
 
@@ -37,7 +37,7 @@ export default function FindRace() {
   };
 
   return (
-    
+
     <form onSubmit={handleFindRace}>
       <div onChange={handleRaceIdInput}>
         <p>Enter race id: </p>
@@ -48,6 +48,6 @@ export default function FindRace() {
         <input type="text" defaultValue=""/>
       </div>
       <input type="submit" value="Find Race"/>
-    </form> 
+    </form>
   );
 }
