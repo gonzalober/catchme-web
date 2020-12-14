@@ -49,11 +49,12 @@ export default function CreateRaceForm() {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleCreateRace} className="form">
-        <div onChange={handleRadioChange}>
+      <form onSubmit={handleCreateRace}>
+        <div onChange={handleRadioChange} className="form">
+          <h2>Race parameters</h2>
           <label className="radio">
             <input type="radio" value="500" name="distance" />
-            <span> 500m</span>
+            <span style={{paddingLeft:"46px"}}> 500m</span>
           </label>
           <label className="radio">
             <input type="radio" value="1000" name="distance" />
@@ -67,7 +68,7 @@ export default function CreateRaceForm() {
             <input type="radio" value="2000" name="distance" />
             <span> 2000m</span>
           </label>
-        </div>
+          </div>
         <div onChange={handleNameChange} className="form-input">
           <input type="text" defaultValue="" placeholder="User Name:" />
         </div>
