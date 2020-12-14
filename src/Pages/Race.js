@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
-import map from '../images/runmap.gif';
 import Header from './Header';
 import ProgressBar from './ProgressBar.js'
+
 
 function Race() {
   const [completed, setCompleted] = useState(0);
@@ -20,7 +20,7 @@ function Race() {
       <div className="main-content">
         < Header/>
           <div className="race">
-            Kiril <ProgressBar bgcolor={"blue"} completed={completed} />
+           <lable>Kiril <ProgressBar bgcolor={"blue"} completed={completed} /></lable>
             David <ProgressBar bgcolor={"red"} completed={completed2} />
             Mace <ProgressBar bgcolor={"green"} completed={completed3} />
             Gonzalo <ProgressBar bgcolor={"orange"} completed={completed4} /> 
