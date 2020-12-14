@@ -7,74 +7,49 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 function Map() {
   const location = useLocation();
   const history = useHistory();
-  const [completed1, setCompleted1] = useState(1);
-  const [completed2, setCompleted2] = useState(2);
-  const [completed3, setCompleted3] = useState(3);
-  const [completed4, setCompleted4] = useState(4);
-
-  useEffect(() => {
-    setInterval(() => setCompleted1(Math.floor(Math.random() * 100) + 1), 2000);
-    setInterval(() => setCompleted2(Math.floor(Math.random() * 100) + 1), 2000);
-    setInterval(() => setCompleted3(Math.floor(Math.random() * 100) + 1), 2000);
-    setInterval(() => setCompleted4(Math.floor(Math.random() * 100) + 1), 2000);
-  }, []);
+  const [completedDistances, setCompletedDistances] = useState([]);
+  let result;
 
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
     variables: { id: location.RaceId },
     pollInterval: 2000,
     onCompleted: async () => {
-      await query();
+      await setInterval(changeState, 2000);
     },
   });
 
-  function query() {
+  function changeState() {
     let users = race.users;
+    let i;
 
-    if (users.length === 1) {
-      return (
-        <div>
-          {users[0]}
-          <ProgressBar bgcolor={"white"} completed={completed1} />
-        </div>
-      );
-    } else if (users.length === 2) {
-      return (
-        <div>
-          {users[0]}
-          <ProgressBar bgcolor={"white"} completed={completed1} />
-          {users[1]}
-          <ProgressBar bgcolor={"white"} completed={completed2} />
-        </div>
-      );
-    } else if (users.length === 3) {
-      return (
-        <div>
-          {users[0]}
-          <ProgressBar bgcolor={"white"} completed={completed1} />
-          {users[1]}
-          <ProgressBar bgcolor={"white"} completed={completed2} />
-          {users[2]}
-          <ProgressBar bgcolor={"white"} completed={completed3} />
-        </div>
-      );
-    } else if (users.length == 4) {
-      return (
-        <div>
-          {users[0]}
-          <ProgressBar bgcolor={"white"} completed={completed1} />
-          {users[1]}
-          <ProgressBar bgcolor={"white"} completed={completed2} />
-          {users[2]}
-          <ProgressBar bgcolor={"white"} completed={completed3} />
-          {users[3]}
-          <ProgressBar bgcolor={"white"} completed={completed4} />
-        </div>
-      );
+    let arr = [];
+
+    for (i = 0; i < users.length; i++) {
+      arr.push(
+        {
+          id: users[i].id,
+          distance: users[i].distance,
+        }
+      )
     }
+
+    setCompletedDistances(arr); 
+    console.log("I get here!"); 
   }
+
   return (
     <div>
-      <p>Distance: {race.distance}</p>
+      <ul>
+      {race &&
+        race.users &&
+        race.users.map((user) => (
+        result = completedDistances.filter(obj => obj.id == user.id)
+        <li key={user.id}>
+          {user.username}
+          {result.distance}
+        </li>
+        ))}
+      </ul>
     </div>
   );
 }
