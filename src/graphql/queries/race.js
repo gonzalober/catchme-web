@@ -12,6 +12,7 @@ export const QUERY_RACE = gql`
         username
         position
         location {
+          id
           startLat
           startLong
           endLat

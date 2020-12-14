@@ -24,7 +24,7 @@ function Race() {
       <Timer/>
       <DistanceCalculator/>
         <div className="race">
-         <lable>Kiril <ProgressBar bgcolor={"blue"} completed={completed} /></lable>
+         <label>Kiril <ProgressBar bgcolor={"blue"} completed={completed} /></label>
           David <ProgressBar bgcolor={"red"} completed={completed2} />
           Mace <ProgressBar bgcolor={"green"} completed={completed3} />
           Gonzalo <ProgressBar bgcolor={"orange"} completed={completed4} /> 
