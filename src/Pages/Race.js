@@ -8,8 +8,8 @@ function Race() {
   return (
     <div className="main-content">
       <Header />
-      <Map />
       <DistanceCalculator />
+      <Map />
       <div className="race"></div>
     </div>
   );

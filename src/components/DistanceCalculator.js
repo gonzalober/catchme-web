@@ -49,12 +49,12 @@ export default function DistanceCalculator() {
   const updateDistanceAndLocation = (lat, long, dist, id) => {
     navigator.geolocation.getCurrentPosition(
       (data) => {
-        console.log(data);
+        // console.log(data);
         //new coordinates
         let currentLat = data.coords.latitude;
         let currentLong = data.coords.longitude;
-        console.log(currentLat);
-        console.log(currentLong);
+        // console.log(currentLat);
+        // console.log(currentLong);
         //distance calculation -> should give some number
         newDistance = dist + distance(lat, long, currentLat, currentLong);
         setDist(newDistance);
@@ -73,12 +73,12 @@ export default function DistanceCalculator() {
             { query: QUERY_LOCATION, variables: { id: location.myLocId } },
           ],
         });
-        console.log("Old end lat:", lat);
-        console.log("Old end long:", long);
+        // console.log("Old end lat:", lat);
+        // console.log("Old end long:", long);
         let startLat = currentLat;
         let startLong = currentLong;
-        console.log("New end lat:", startLat);
-        console.log("New end long:", startLong);
+        // console.log("New end lat:", startLat);
+        // console.log("New end long:", startLong);
         console.log("Distance is: ", newDistance);
         console.log("Location id is:", id);
         setTimeout(function() {

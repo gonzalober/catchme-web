@@ -7,14 +7,18 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 function Map() {
   const location = useLocation();
   const history = useHistory();
-  const [completedDistances, setCompletedDistances] = useState([]);
-  let result;
+  const [completedDistances, setCompletedDistances] = React.useState([]);
+  // let result;
 
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
     variables: { id: location.RaceId },
     pollInterval: 2000,
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
     onCompleted: async () => {
-      await setInterval(changeState, 2000);
+        
+        // console.log("users: ", users);
+        await changeState();
     },
   });
 
@@ -25,29 +29,41 @@ function Map() {
     let arr = [];
 
     for (i = 0; i < users.length; i++) {
+      // console.log("user:", users[i]);
+      // console.log("distance of a user:", users[i].distance);
       arr.push(
         {
           id: users[i].id,
-          distance: users[i].distance,
+          distance: users[i].location.distance,
         }
       )
+      // arr.push(
+      //   {
+      //     id: users[i].id,
+      //     distance: users[i].distance,
+      //   }
+      // )
     }
 
+    console.log(arr);
+    // arr = [];
+
     setCompletedDistances(arr); 
-    console.log("I get here!"); 
+    arr = [];
+    // arr = arr.concat();
+    // console.log("I get here!"); 
+    // console.log("also users:", race.users);
+    // console.log("comp dist:", completedDistances);
   }
 
   return (
     <div>
       <ul>
-      {race &&
-        race.users &&
-        race.users.map((user) => (
-        result = completedDistances.filter(obj => obj.id == user.id)
-        <li key={user.id}>
-          {user.username}
-          {result.distance}
-        </li>
+        {completedDistances.map((obj) => (
+          <li key={obj.id}>
+            <p>{obj.id}</p>
+            <p>{obj.distance}</p>            
+          </li>
         ))}
       </ul>
     </div>
