@@ -1,13 +1,13 @@
-// @import './_variables';
+@import './_race';
 @import './_home';
 @import './_heading.scss';
 @import './raceformbutton';
-
+  
 * {
   box-sizing: border-box;
   text-decoration: none;
 }
-
+        
 body {
   color: white;
   font-family: 'Press Start 2P', cursive;
@@ -17,5 +17,17 @@ body {
 }
 
 .container {
+  text-align: center;
+  height: 100vh;
+}        
+
+.main-content {
+  display: grid;
+  grid-template-rows: 15% auto 5%;
+  height: 100vh;
+}
+
+footer {
+  grid-row: 3 / 4;
   text-align: center
 }

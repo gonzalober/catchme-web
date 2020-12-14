@@ -2,8 +2,6 @@ $radioSize: 22px;
 $radioBorder: #d1d7e3;
 $radioActive: #5d9bfb;
 
-
-
 .form{
   display: flex;
   justify-content: center; 
@@ -79,14 +77,26 @@ $radioActive: #5d9bfb;
 }
 
 
-.radio:first-child {
-    margin-left: 133px;
-}
-
 .form-input {
   margin: 2%;
 }
 .form-submit {
   width: 41%;
   margin: 0 auto;
+}
+
+// createrace
+.form-container {
+  grid-row: 2 \ 3;
+  justify-self: center;
+  .form{
+    justify-self: center;
+    align-self: center;
+  }
+}
+
+form {
+  grid-row: 2 \ 3;
+  justify-self: center;
+  align-self: center;
 }

@@ -1,24 +1,41 @@
-import React, { Component } from 'react';
-import map from '../images/runmap.gif';
+import React, { Component, useState, useEffect } from 'react';
 import Header from './Header';
 import Timer from '../components/Timer'
 import DistanceCalculator from '../components/DistanceCalculator';
-export default class Race extends Component {
-  render() {
-    return (
-      <div className="main-content">
-        <Header/>
-        <Timer/>
-        <DistanceCalculator/>
-          <div className="race">
-            <img src={map} alt="Map" />
-            <h4>Race Details:</h4>
-            <p>David</p>
-            <p>Time: 8min 25sec</p>
-            <p>Distance: 1000m</p>
-          </div>
-      </div>
-    )
-  }
+import ProgressBar from './ProgressBar.js'
+
+function Race() {
+  const [completed, setCompleted] = useState(0);
+  const [completed2, setCompleted2] = useState(1);
+  const [completed3, setCompleted3] = useState(1);
+  const [completed4, setCompleted4] = useState(1);
+
+  useEffect(() => {
+    setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 2000);
+    setInterval(() => setCompleted2(Math.floor(Math.random() * 100) + 1), 2000);
+    setInterval(() => setCompleted3(Math.floor(Math.random() * 100) + 1), 2000);
+    setInterval(() => setCompleted4(Math.floor(Math.random() * 100) + 1), 2000);
+  }, []);
+
+
+  return (
+    <div className="main-content">
+      <Header/>
+      <Timer/>
+      <DistanceCalculator/>
+        <div className="race">
+         <lable>Kiril <ProgressBar bgcolor={"blue"} completed={completed} /></lable>
+          David <ProgressBar bgcolor={"red"} completed={completed2} />
+          Mace <ProgressBar bgcolor={"green"} completed={completed3} />
+          Gonzalo <ProgressBar bgcolor={"orange"} completed={completed4} /> 
+        </div>
+    </div>
+  )
 }
+
+
+
+
+
+export default Race;
 
