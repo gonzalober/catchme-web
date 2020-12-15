@@ -70,9 +70,12 @@
 
 .how-to-play {
   grid-row: 2 / 3;
-  align-self: center;
   h2 {
-    padding-bottom: 10%;
+    align-self: start;
+    padding-bottom: 22%;
+  }
+  p {
+    align-self: center;
   }
 
 }

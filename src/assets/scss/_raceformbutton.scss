@@ -79,16 +79,23 @@ $radioActive: #5d9bfb;
 
 .form-input {
   margin: 2%;
+  input{
+    font-size: x-large;
+  }
 }
 .form-submit {
   width: 41%;
   margin: 0 auto;
+  font-size: x-large;
 }
 
 // createrace
 .form-container {
   grid-row: 2 \ 3;
-  justify-self: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+ 
   .form{
     justify-self: center;
     align-self: center;
@@ -99,4 +106,7 @@ form {
   grid-row: 2 \ 3;
   justify-self: center;
   align-self: center;
+  h2 {
+    margin-top: 12%;
+  }
 }

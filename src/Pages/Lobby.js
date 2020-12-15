@@ -1,10 +1,14 @@
 import React, { Component, useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import Header from "../components/Header";
+import Header2 from "../components/no-race-header";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
+import Footer from "../components/Footer"
+
+
+
 export default function Lobby() {
   const location = useLocation();
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
@@ -88,13 +92,13 @@ export default function Lobby() {
   };
   return (
     <div className="main-content">
-      <Header />
+      <Header2 />
       <div className="lobby-page">
-        <h1>Lobby</h1>
+        <h2>Lobby</h2>
         <p>Code: {race && race.id}</p>
         <p>Distance: {race && race.distance}m</p>
         <p>Participants:</p>
-        <ol>
+        <ol className="user-details">
           {race &&
             race.users &&
             race.users.map((user) => (
@@ -106,9 +110,9 @@ export default function Lobby() {
               </li>
             ))}
         </ol>
-        <button></button>
         <button onClick={checkReady}>Start Race</button>
       </div>
+      < Footer />
     </div>
   );
 }
