@@ -7,10 +7,10 @@ import Map from "../components/Map";
 function Race() {
   return (
     <div className="main-content">
+      <div className="race"></div>
       <Header />
       <DistanceCalculator />
       <Map />
-      <div className="race"></div>
     </div>
   );
 }

@@ -14,11 +14,10 @@ function Map() {
     variables: { id: location.RaceId },
     pollInterval: 2000,
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
     onCompleted: async () => {
-        
-        // console.log("users: ", users);
-        await changeState();
+      // console.log("users: ", users);
+      await changeState();
     },
   });
 
@@ -31,12 +30,10 @@ function Map() {
     for (i = 0; i < users.length; i++) {
       // console.log("user:", users[i]);
       // console.log("distance of a user:", users[i].distance);
-      arr.push(
-        {
-          id: users[i].id,
-          distance: users[i].location.distance,
-        }
-      )
+      arr.push({
+        id: users[i].id,
+        distance: users[i].location.distance,
+      });
       // arr.push(
       //   {
       //     id: users[i].id,
@@ -48,10 +45,10 @@ function Map() {
     console.log(arr);
     // arr = [];
 
-    setCompletedDistances(arr); 
+    setCompletedDistances(arr);
     arr = [];
     // arr = arr.concat();
-    // console.log("I get here!"); 
+    // console.log("I get here!");
     // console.log("also users:", race.users);
     // console.log("comp dist:", completedDistances);
   }
@@ -62,7 +59,9 @@ function Map() {
         {completedDistances.map((obj) => (
           <li key={obj.id}>
             <p>{obj.id}</p>
-            <p>{obj.distance}</p>            
+            <p>
+              <ProgressBar bgcolor={"white"} completed={obj.distance} />
+            </p>
           </li>
         ))}
       </ul>

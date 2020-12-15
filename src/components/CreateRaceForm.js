@@ -54,7 +54,7 @@ export default function CreateRaceForm() {
           <h2>Race parameters</h2>
           <label className="radio">
             <input type="radio" value="500" name="distance" />
-            <span style={{paddingLeft:"46px"}}> 500m</span>
+            <span style={{ paddingLeft: "46px" }}> 500m</span>
           </label>
           <label className="radio">
             <input type="radio" value="1000" name="distance" />
@@ -68,7 +68,7 @@ export default function CreateRaceForm() {
             <input type="radio" value="2000" name="distance" />
             <span> 2000m</span>
           </label>
-          </div>
+        </div>
         <div onChange={handleNameChange} className="form-input">
           <input type="text" defaultValue="" placeholder="User Name:" />
         </div>
