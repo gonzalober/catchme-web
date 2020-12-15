@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../images/logo.gif'
 import {Link} from 'react-router-dom';
 import Footer from '../components/Footer'
-
+import Stopwatch from '../components/Stopwatch'
 
 export default class Home extends Component {
   render() {
