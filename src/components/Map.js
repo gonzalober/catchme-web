@@ -56,13 +56,16 @@ function Map() {
 
   return (
     <div>
-      {completedDistances.map((obj) => (
-        <div key={obj.id}>
-          <p>{obj.username}</p>
-          <p>{obj.distance.toFixed(2)}m</p>
-          <ProgressBar bgcolor={"white"} completed={obj.distance} />
-        </div>
-      ))}
+
+
+        {completedDistances.map((obj) => (
+          <div key={obj.id}>
+            <p>{obj.username}</p>
+            <p>{obj.distance.toFixed(2)}m</p>
+            <ProgressBar completed={obj.distance} raceDist={race.distance} />   
+          </div>         
+        ))}
+
     </div>
   );
 }
