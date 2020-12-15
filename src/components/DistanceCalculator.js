@@ -4,6 +4,28 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { UPDATE_LOCATION } from "../graphql/mutations/updateLocation";
 import { QUERY_LOCATION } from "../graphql/queries/location";
+
+function distance(lat1, lon1, lat2, lon2) {
+  if (lat1 == lat2 && lon1 == lon2) {
+    return 0;
+  } else {
+    var radlat1 = (Math.PI * lat1) / 180;
+    var radlat2 = (Math.PI * lat2) / 180;
+    var theta = lon1 - lon2;
+    var radtheta = (Math.PI * theta) / 180;
+    var dist =
+      Math.sin(radlat1) * Math.sin(radlat2) +
+      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = (dist * 180) / Math.PI;
+    dist = dist * 60 * 1.1515 * 1609.344;
+    return dist;
+  }
+}
+
 export default function DistanceCalculator() {
   const [dist, setDist] = React.useState(null);
   const location = useLocation();
@@ -13,28 +35,7 @@ export default function DistanceCalculator() {
   let myDistance = location.myDistance;
   let myLocId = location.myLocId;
   let newDistance;
-
-
-  function distance(lat1, lon1, lat2, lon2) {
-    if (lat1 == lat2 && lon1 == lon2) {
-      return 0;
-    } else {
-      var radlat1 = (Math.PI * lat1) / 180;
-      var radlat2 = (Math.PI * lat2) / 180;
-      var theta = lon1 - lon2;
-      var radtheta = (Math.PI * theta) / 180;
-      var dist =
-        Math.sin(radlat1) * Math.sin(radlat2) +
-        Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      dist = (dist * 180) / Math.PI;
-      dist = dist * 60 * 1.1515 * 1609.344;
-      return dist;
-    }
-  }
+  let endTime;
 
   const [updateLocation] = useMutation(UPDATE_LOCATION);
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
@@ -57,6 +58,13 @@ export default function DistanceCalculator() {
         //distance calculation -> should give some number
         newDistance = dist + distance(lat, long, currentLat, currentLong);
         setDist(newDistance);
+        console.log(race.distance);
+        if (dist > 5) {
+          history.push({
+            pathname: "/race-end",
+          });
+          return;
+        }
         //update the users location in db
         updateLocation({
           variables: {
@@ -80,9 +88,9 @@ export default function DistanceCalculator() {
         // console.log("New end long:", startLong);
         console.log("Distance is: ", newDistance);
         console.log("Location id is:", id);
-        setTimeout(function() {
+        setTimeout(function () {
           updateDistanceAndLocation(startLat, startLong, newDistance, id);
-        }, 3000)
+        }, 3000);
       },
       (error) => console.log(error),
       {
@@ -90,8 +98,6 @@ export default function DistanceCalculator() {
       }
     );
   };
-  return (
-    <>
-    </>
-  );
+
+  return <></>;
 }
