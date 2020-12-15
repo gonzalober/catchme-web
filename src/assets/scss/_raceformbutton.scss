@@ -79,10 +79,14 @@ $radioActive: #5d9bfb;
 
 .form-input {
   margin: 2%;
+  input{
+    font-size: x-large;
+  }
 }
 .form-submit {
   width: 41%;
   margin: 0 auto;
+  font-size: x-large;
 }
 
 // createrace

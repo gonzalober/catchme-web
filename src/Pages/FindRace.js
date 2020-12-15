@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FindRaceForm from '../components/FindRaceForm';
 import Header from '../components/Header';
-import logo from '../images/logo.gif'
+import Footer from '../components/Footer';
 
 export default class FindRace extends Component {
   render() {
@@ -12,7 +12,7 @@ export default class FindRace extends Component {
             <h2>Race Finder</h2>
             <FindRaceForm />
           </div>
-        
+          <Footer />
       </div>
     )
   }

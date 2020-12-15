@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import LeaderTable from '../components/LeaderTable';
+import  Footer from '../components/Footer';
 
 export default class Leaderboard extends Component {
   render() {
@@ -11,6 +12,7 @@ export default class Leaderboard extends Component {
             <h1>Leaderboard</h1>
             <LeaderTable/>
           </div>
+        <Footer />
       </div>
     );
   }
