@@ -88,7 +88,10 @@ $radioActive: #5d9bfb;
 // createrace
 .form-container {
   grid-row: 2 \ 3;
-  justify-self: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+ 
   .form{
     justify-self: center;
     align-self: center;
@@ -99,4 +102,7 @@ form {
   grid-row: 2 \ 3;
   justify-self: center;
   align-self: center;
+  h2 {
+    margin-top: 12%;
+  }
 }

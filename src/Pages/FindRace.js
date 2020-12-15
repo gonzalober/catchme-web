@@ -9,9 +9,10 @@ export default class FindRace extends Component {
       <div className="main-content">
         <Header/>
           <div className="race-finder">
-            <p>Race Finder</p>
+            <h2>Race Finder</h2>
+            <FindRaceForm />
           </div>
-        <FindRaceForm />
+        
       </div>
     )
   }
