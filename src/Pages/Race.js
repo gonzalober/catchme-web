@@ -13,6 +13,7 @@ function Race() {
           <Map />
         </div>
       <DistanceCalculator/>
+      <Stopwatch />
       <Footer />
     </div>
   );
