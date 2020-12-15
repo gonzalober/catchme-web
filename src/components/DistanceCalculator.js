@@ -13,7 +13,7 @@ export default function DistanceCalculator() {
   let myDistance = location.myDistance;
   let myLocId = location.myLocId;
   let newDistance;
-
+  let endTime;
 
   function distance(lat1, lon1, lat2, lon2) {
     if (lat1 == lat2 && lon1 == lon2) {
@@ -44,54 +44,58 @@ export default function DistanceCalculator() {
       await updateDistanceAndLocation(myEndLat, myEndLong, myDistance, myLocId);
     },
   });
-
-  const updateDistanceAndLocation = (lat, long, dist, id) => {
-    navigator.geolocation.getCurrentPosition(
-      (data) => {
-        // console.log(data);
-        //new coordinates
-        let currentLat = data.coords.latitude;
-        let currentLong = data.coords.longitude;
-        // console.log(currentLat);
-        // console.log(currentLong);
-        //distance calculation -> should give some number
-        newDistance = dist + distance(lat, long, currentLat, currentLong);
-        setDist(newDistance);
-        //update the users location in db
-        updateLocation({
-          variables: {
-            id: id,
-            startLat: lat,
-            startLong: long,
-            endLat: currentLat,
-            endLong: currentLong,
-            distance: newDistance,
-          },
-          refetchQueries: [
-            { query: QUERY_RACE, variables: { id: location.RaceId } },
-            { query: QUERY_LOCATION, variables: { id: location.myLocId } },
-          ],
-        });
-        // console.log("Old end lat:", lat);
-        // console.log("Old end long:", long);
-        let startLat = currentLat;
-        let startLong = currentLong;
-        // console.log("New end lat:", startLat);
-        // console.log("New end long:", startLong);
-        console.log("Distance is: ", newDistance);
-        console.log("Location id is:", id);
-        setTimeout(function() {
-          updateDistanceAndLocation(startLat, startLong, newDistance, id);
-        }, 3000)
-      },
-      (error) => console.log(error),
-      {
-        enableHighAccuracy: true,
-      }
-    );
-  };
-  return (
-    <>
-    </>
-  );
+  let updateDistanceAndLocation;
+  console.log(race.distance);
+  if (1 === dist) {
+    history.push({
+      pathname: "./end-race",
+    });
+  } else {
+    updateDistanceAndLocation = (lat, long, dist, id) => {
+      navigator.geolocation.getCurrentPosition(
+        (data) => {
+          // console.log(data);
+          //new coordinates
+          let currentLat = data.coords.latitude;
+          let currentLong = data.coords.longitude;
+          // console.log(currentLat);
+          // console.log(currentLong);
+          //distance calculation -> should give some number
+          newDistance = dist + distance(lat, long, currentLat, currentLong);
+          setDist(newDistance);
+          //update the users location in db
+          updateLocation({
+            variables: {
+              id: id,
+              startLat: lat,
+              startLong: long,
+              endLat: currentLat,
+              endLong: currentLong,
+              distance: newDistance,
+            },
+            refetchQueries: [
+              { query: QUERY_RACE, variables: { id: location.RaceId } },
+              { query: QUERY_LOCATION, variables: { id: location.myLocId } },
+            ],
+          });
+          // console.log("Old end lat:", lat);
+          // console.log("Old end long:", long);
+          let startLat = currentLat;
+          let startLong = currentLong;
+          // console.log("New end lat:", startLat);
+          // console.log("New end long:", startLong);
+          console.log("Distance is: ", newDistance);
+          console.log("Location id is:", id);
+          setTimeout(function () {
+            updateDistanceAndLocation(startLat, startLong, newDistance, id);
+          }, 3000);
+        },
+        (error) => console.log(error),
+        {
+          enableHighAccuracy: true,
+        }
+      );
+    };
+  }
+  return <></>;
 }
