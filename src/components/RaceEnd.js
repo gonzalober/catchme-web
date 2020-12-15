@@ -1,6 +1,8 @@
 import React from "react";
-import { CREATE_SCORE } from "../graphql/mutations/createScore";
 import { useLocation, useHistory } from "react-router-dom";
+import { CREATE_SCORE } from "../graphql/mutations/createScore";
+import { QUERY_RACE } from "../graphql/queries/race";
+import Footer from "../components/Footer";
 
 export default function RaceEnd() {
   const location = useLocation();
@@ -9,17 +11,20 @@ export default function RaceEnd() {
     variables: { id: location.RaceId },
     pollInterval: 2000,
   });
-  let endTime;
+  let userEndTime;
   let startTime;
+  //CREATE SCORE
   const handleScore = () => {
     createScore({
       variables: {
-        time: endTime,
+        time: userEndTime,
         user: userId,
       },
     });
   };
-  const timeOfTheRace = () => {
+
+  //TIME OF THE RACE
+  const TotalTimeRace = () => {
     return race.endTime - race.startTime;
   };
 
@@ -32,7 +37,7 @@ export default function RaceEnd() {
         <p>Distance completed: {race && race.distance}m</p>
         <p>Start Time: {race && race.startTime}</p>
         <p>End Time: {endTime}</p>
-        <p>Time:{timeOfTheRace()}</p>
+        <p>Time:{TotalTimeRace()}</p>
         <p>Score: {handleScore}</p>
         <button>Submit Time</button>
       </div>
