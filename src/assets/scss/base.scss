@@ -1,7 +1,9 @@
 @import './_race';
 @import './_home';
-@import './_heading.scss';
+@import './_heading';
 @import './raceformbutton';
+@import './lobby';
+
   
 * {
   box-sizing: border-box;
@@ -23,7 +25,7 @@ body {
 
 .main-content {
   display: grid;
-  grid-template-rows: 15% auto 5%;
+  grid-template-rows: 21% auto 5%;
   height: 100vh;
 }
 

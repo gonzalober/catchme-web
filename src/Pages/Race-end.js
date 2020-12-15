@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
+import  Footer from '../components/Footer';
 
 export default class RaceEnd extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class RaceEnd extends Component {
               <p>Date of Race: 9/12/20</p>
           </div>
             <button>Submit Time</button>
+          < Footer/>
       </div>
     )
   }

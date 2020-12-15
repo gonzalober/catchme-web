@@ -1,8 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
-import map from '../images/runmap.gif';
-import Header from '../components/Header';
+import Header2 from '../components/no-race-header';
 import ProgressBar from '../components/ProgressBar.js';
 import Timer from '../components/Timer';
+import  Footer from '../components/Footer';
 import DistanceCalculator from '../components/DistanceCalculator';
 
 function Race() {
@@ -42,19 +42,17 @@ function Race() {
 
   return (
     <div className="main-content">
-      <Header/>
-      <Timer/>
-      <DistanceCalculator/>
-        <div className="race">
-         {query()}
-        </div>
+      < Header2/>
+        <div className="race-details">
+          < Timer/>
+          < DistanceCalculator/>
+            <div className="race">
+            {query()}
+            </div>
+          </div>
+      < Footer />
     </div>
   )
 }
-
-
-
-
-
 
 export default Race;
