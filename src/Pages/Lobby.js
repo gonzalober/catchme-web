@@ -112,7 +112,7 @@ export default function Lobby() {
         </ol>
         <button onClick={checkReady}>Start Race</button>
       </div>
-      < Footer />
+      <Footer />
     </div>
   );
 }

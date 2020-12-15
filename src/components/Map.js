@@ -34,6 +34,7 @@ function Map() {
       arr.push(
         {
           id: users[i].id,
+          username: users[i].username,
           distance: users[i].location.distance,
         }
       )
@@ -58,14 +59,13 @@ function Map() {
 
   return (
     <div>
-      <ul>
         {completedDistances.map((obj) => (
-          <li key={obj.id}>
-            <p>{obj.id}</p>
-            <p>{obj.distance}</p>            
-          </li>
+          <div key={obj.id}>
+            <p>{obj.username}</p>
+            <p>{obj.distance.toFixed(2)}m</p>
+            <ProgressBar bgcolor={"white"} completed={obj.distance} />   
+          </div>         
         ))}
-      </ul>
     </div>
   );
 }

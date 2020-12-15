@@ -8,12 +8,12 @@ import  Footer from '../components/Footer';
 function Race() {
   return (
     <div className="main-content">
-      < Header2/>
+      <Header2/>
         <div className="race-details">
           <Map />
         </div>
       <DistanceCalculator/>
-      < Footer />
+      <Footer />
     </div>
   );
 }
