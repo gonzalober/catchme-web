@@ -4,7 +4,6 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { UPDATE_LOCATION } from "../graphql/mutations/updateLocation";
 import { QUERY_LOCATION } from "../graphql/queries/location";
-// import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 export default function DistanceCalculator() {
   const [dist, setDist] = React.useState(null);
   const location = useLocation();
@@ -14,7 +13,7 @@ export default function DistanceCalculator() {
   let myDistance = location.myDistance;
   let myLocId = location.myLocId;
   let newDistance;
-  // console.log("Details:", myEndLat, myEndLong, myDistance, myLocId, location.me, location.RaceId);
+
 
   function distance(lat1, lon1, lat2, lon2) {
     if (lat1 == lat2 && lon1 == lon2) {
@@ -92,8 +91,7 @@ export default function DistanceCalculator() {
     );
   };
   return (
-    <div>
-      <p>Distance: {dist}</p>
-    </div>
+    <>
+    </>
   );
 }
