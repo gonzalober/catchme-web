@@ -5,6 +5,7 @@ import { QUERY_RACE } from "../graphql/queries/race";
 import Footer from "../components/Footer";
 
 export default function RaceEnd() {
+  console.log("-------");
   const location = useLocation();
   const [createScore] = useMutation(CREATE_SCORE);
   const { data: { race } = {} } = useQuery(QUERY_RACE, {

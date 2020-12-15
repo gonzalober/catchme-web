@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import Header from "../components/Header";
+import Header2 from "../components/Header";
 import Footer from "../components/Footer";
+import ScoreCalculator from "../components/RaceEnd";
 
 export default class RaceEnd extends Component {
   render() {
     return (
       <div className="main-content">
-        <Header />
+        <Header2 />
         <div className="race-end">
-          <RaceEnd />
+          <ScoreCalculator />
         </div>
         <Footer />
       </div>
