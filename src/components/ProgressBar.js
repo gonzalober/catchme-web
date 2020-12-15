@@ -4,20 +4,21 @@ import PropTypes from 'prop-types';
 
 
 const ProgressBar = (props) => {
-  const { bgcolor, completed } = props;
+  const { completed, raceDist } = props;
+  const currentPercentage = (completed/raceDist)*100
 
   const containerStyles = {
     height: 20,
-    width: '100%',
+    width: '80%',
     backgroundColor: 'black',
     borderRadius: 50,
-    margin: 50,
+    margin: '0 auto',
   }
 
   const fillerStyles = {
     height: '100%',
-    width: `${completed}%`,
-    backgroundColor: bgcolor,
+    width: `${currentPercentage >= 100 ? 100 : currentPercentage}%`,
+    backgroundColor: 'white',
     borderRadius: 'inherit',
     transition: 'width 1s ease-in-out',
     textAlign: 'right',
@@ -32,15 +33,15 @@ const ProgressBar = (props) => {
   return (
     <div style={containerStyles}>
       <div style={fillerStyles}>
-        <span style={labelStyles}><img src={runner} className="kiril-head" alt="home-icon" /></span>
+        <span style={labelStyles}></span>
       </div>
     </div>
   );
 };
 
 ProgressBar.propTypes = {
-  bgcolor: PropTypes.string,
   completed: PropTypes.number,
+  raceDist: PropTypes.number,
 };
 
 export default ProgressBar;

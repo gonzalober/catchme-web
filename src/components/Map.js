@@ -63,7 +63,7 @@ function Map() {
           <div key={obj.id}>
             <p>{obj.username}</p>
             <p>{obj.distance.toFixed(2)}m</p>
-            <ProgressBar bgcolor={"white"} completed={obj.distance} />   
+            <ProgressBar completed={obj.distance} raceDist={race.distance} />   
           </div>         
         ))}
     </div>
