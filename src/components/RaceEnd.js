@@ -31,7 +31,6 @@ export default function RaceEnd() {
 
   return (
     <div className="main-content">
-      <Header2 />
       <div className="lobby-page">
         <h1>Race Complete!</h1>
         <p>Race code: {race && race.id}</p>
@@ -42,7 +41,6 @@ export default function RaceEnd() {
         <p>Score: {handleScore}</p>
         <button>Submit Time</button>
       </div>
-      <Footer />
     </div>
   );
 }

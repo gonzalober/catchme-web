@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import StopwatchDisplay from './StopwatchDisplay';
-import StopwatchHistory from './StopwatchHistory';
 
 class StopwatchAutoStart extends React.Component {
   constructor(props) {
@@ -74,7 +73,6 @@ class StopwatchAutoStart extends React.Component {
           {...this.state}
           formatTime={this.formatTime}
         />
-        <StopwatchHistory {...this.state} formatTime={this.formatTime} />
       </div>
     );
   }

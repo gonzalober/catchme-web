@@ -59,12 +59,12 @@ export default function DistanceCalculator() {
         newDistance = dist + distance(lat, long, currentLat, currentLong);
         setDist(newDistance);
         console.log(race.distance);
-        if (dist > 5) {
-          history.push({
-            pathname: "/race-end",
-          });
-          return;
-        }
+        // if (dist > 5) {
+        //   history.push({
+        //     pathname: "/race-end",
+        //   });
+        //   return;
+        // }
         //update the users location in db
         updateLocation({
           variables: {
