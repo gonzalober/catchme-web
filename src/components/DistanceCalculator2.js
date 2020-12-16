@@ -92,6 +92,7 @@ export default function DistanceCalculator() {
             endCoor.long
           )
       );
+      console.log("current distance in state: ", distance);
       setStartCoor({ ...endCoor });
     }
   }, [first, endCoor]);
@@ -126,7 +127,7 @@ export default function DistanceCalculator() {
       const user = race.users.filter((user) => {
         return user.id === location.me;
       });
-      console.log(user[0].location.distance, location.me, race.distance);
+      console.log("user's distance in db: ", user[0].location.distance, location.me, race.distance);
       if (distance > race.distance) {
         userRaceTime = Date.now() - race.startTime;
         createScore({
