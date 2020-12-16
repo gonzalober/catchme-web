@@ -5,17 +5,25 @@
   "private": true,
   "type": "module",
   "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "istanbul"
+    ],
     "presets": [
       "@babel/preset-react"
     ]
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@cypress/code-coverage": "^3.8.8",
+    "@cypress/instrument-cra": "^1.4.0",
     "@material-ui/core": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "apollo-boost": "^0.4.9",
+    "babel-plugin-istanbul": "^6.0.0",
     "cypress": "^6.1.0",
     "eslint-config-standard": "^16.0.2",
     "graphql": "^15.4.0",
@@ -33,14 +41,15 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint . --fix",
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
     "coverage": "jest --coverage",
     "startcy": "my-server -p 3000",
     "cy:run": "cypress run",
-    "testcy": "start-server-and-test startcy http://localhost:3000 cy:run"
+    "testcy": "start-server-and-test startcy http://localhost:3000 cy:run",
+    "startcov": "react-scripts -r @cypress/instrument-cra start"
   },
   "eslintConfig": {
     "extends": [
@@ -61,7 +70,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.12.7",
     "eslint": "^7.14.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
