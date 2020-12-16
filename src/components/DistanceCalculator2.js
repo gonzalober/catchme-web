@@ -61,8 +61,6 @@ export default function DistanceCalculator() {
         (data) => {
           let lat = parseFloat(data.coords.latitude.toFixed(5));
           let long = parseFloat(data.coords.longitude.toFixed(5));
-          console.log("Latitude:", lat);
-          console.log("Longitude:", long);
           if (shouldRunFirst) {
             setStartCoor({ lat, long });
             setEndCoor({ lat, long });
