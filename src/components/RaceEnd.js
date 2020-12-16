@@ -29,20 +29,16 @@ export default function RaceEnd() {
         <p>Distance completed: {race && race.distance}m</p>
         <p>Start Time: {race && race.startTime}</p>
         <p>Time of the Race:{race && maxScore()}</p>
-        <p>Score: {race && 
-                    race.users.find((user) => user.id === location.me).score.time}
-        </p>
-        <button
-          onClick={() => {
-            history.push({
-              pathname: "/race-end",
-              RaceId: race.id,
-              me: location.me,
-            });
-          }}
-        >
-          Submit Time
-        </button>
+        <div>
+          Score:{" "}
+          {race.users.map((obj) => (
+            <div key={obj.id}>
+              <p>
+                {obj.username} = {parseInt(obj.score.time.toFixed(2))}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
