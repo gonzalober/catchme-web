@@ -1,27 +1,38 @@
 @import './_race';
 @import './_home';
 @import './_heading';
-@import './raceformbutton';
-@import './lobby';
+@import './_raceformbutton';
+@import './_lobby';
 
-  
 * {
   box-sizing: border-box;
   text-decoration: none;
+  list-style-type: none;
 }
-        
+
 body {
   color: white;
   font-family: 'Press Start 2P', cursive;
   font-weight: 500;
   margin: 0;
   background-color: rgb(10, 31, 53);
-}
+};
+
+a,
+button,
+input,
+::placeholder {
+  font-family: 'Press Start 2P', cursive;
+  color: blue;
+  :focus{
+    color: blue;
+  };
+};
 
 .container {
   text-align: center;
   height: 100vh;
-}        
+}
 
 .main-content {
   display: grid;

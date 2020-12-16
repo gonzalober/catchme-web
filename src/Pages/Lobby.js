@@ -99,15 +99,15 @@ export default function Lobby() {
             race.users &&
             race.users.map((user) => (
               <li key={user.id}>
-                {user.username}
+                - {user.username} <button onClick={handleReady(user.id)}>Ready!</button>
                 {user.id === location.me ? (
-                  <button onClick={handleReady(user.id)}>Ready!</button>
+                <></>
                 ) : null}
               </li>
             ))}
         </ol>
         {location.isHost && isEveryoneReady &&
-          <button onClick={setStartTime}>Start Race</button>}
+          <button onClick={setStartTime}><img className="start-button" src={Button} alt="start-button" /> </button>}
       </div>
       <Footer />
     </div>

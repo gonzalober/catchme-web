@@ -22,5 +22,4 @@ StopwatchDisplay.propTypes = {
   currentTimeMs: PropTypes.number,
 };
 
-
 export default StopwatchDisplay;
