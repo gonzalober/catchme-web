@@ -6,6 +6,7 @@ import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 import Footer from "../components/Footer";
+import Button from "../images/start-button.gif"
 
 export default function Lobby() {
   //define variables
@@ -25,7 +26,6 @@ export default function Lobby() {
   });
   const [createLocation] = useMutation(CREATE_LOCATION);
   const [updateRaceStartTime] = useMutation(UPDATE_RACE_START_TIME);
-
   const checkReady = () => {
     let i;
     let readyCounter = 0;
@@ -40,7 +40,6 @@ export default function Lobby() {
       setIsEveryoneReady(false);
     }
   };
-
   const checkStarted = () => {
     if (race.startTime != null) {
       let k;
@@ -66,7 +65,6 @@ export default function Lobby() {
       }
     }
   };
-
   const setStartTime = () => {
     updateRaceStartTime({
       variables: {
@@ -75,7 +73,6 @@ export default function Lobby() {
       },
     });
   };
-
   const handleReady = (param) => (e) => {
     createLocation({
       variables: {
@@ -106,7 +103,7 @@ export default function Lobby() {
             race.users &&
             race.users.map((user) => (
               <li key={user.id}>
-                - {user.username}
+                - {user.username} 
                 {user.id === location.me ? (
                   <button onClick={handleReady(user.id)}>Ready!</button>
                 ) : null}
