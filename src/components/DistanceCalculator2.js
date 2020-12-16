@@ -128,6 +128,7 @@ export default function DistanceCalculator() {
         return user.id === location.me;
       });
       console.log("user's distance in db: ", user[0].location.distance, location.me, race.distance);
+      console.log("all users in db: ", race.users);
       if (distance > race.distance) {
         userRaceTime = Date.now() - race.startTime;
         createScore({
