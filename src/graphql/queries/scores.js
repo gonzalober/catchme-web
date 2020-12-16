@@ -8,6 +8,9 @@ export const SCORES_QUERY = gql`
       user {
         id
         username
+        race {
+          distance
+        }
       }
     }
   }
