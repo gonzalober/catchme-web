@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { QUERY_RACE } from "../graphql/queries/race";
-import Header2 from "../components/no-race-header";
+import Header2 from "../components/Header2";
 import { CREATE_SCORE } from "../graphql/mutations/createScore";
 import Footer from "../components/Footer";
 
