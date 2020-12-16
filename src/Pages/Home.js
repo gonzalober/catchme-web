@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../images/logo.gif'
 import {Link} from 'react-router-dom';
 import Footer from '../components/Footer'
-import Stopwatch from '../components/Stopwatch'
+import StopwatchStarted from '../components/StopwatchAutoStart'
 
 export default class Home extends Component {
   render() {
@@ -18,6 +18,7 @@ export default class Home extends Component {
         <button><Link to={"/findrace"}>Find a race</Link></button>
         <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
         <img className="running-boy" src={logo} alt="Logo" />
+        <StopwatchStarted />
       </div>
       <Footer />
     </div>
