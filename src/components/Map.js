@@ -8,7 +8,7 @@ function Map() {
   const location = useLocation();
   const history = useHistory();
   const [completedDistances, setCompletedDistances] = React.useState([]);
-  // let result;
+  const [youveFinished, setYouveFinished] = React.useState("");
 
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
     variables: { id: location.RaceId },
@@ -23,42 +23,34 @@ function Map() {
   function changeState() {
     let users = race.users;
     let i;
+    const currentUser = race.users.find((user) => user.id === location.me);
 
     let arr = [];
 
     for (i = 0; i < users.length; i++) {
-      // console.log("user:", users[i]);
-      // console.log("distance of a user:", users[i].distance);
       arr.push({
         id: users[i].id,
         username: users[i].username,
         distance: users[i].location.distance,
       });
-      // arr.push(
-      //   {
-      //     id: users[i].id,
-      //     distance: users[i].distance,
-      //   }
-      // )
     }
     console.log(users);
+
+    if (currentUser && currentUser.score ) {
+      setYouveFinished("You have finished the race!")
+    }
+    
     if (users.every((user) => user.score)) {
       history.push({
         pathname: "/race-end",
         RaceId: race.id,
         me: location.me,
       });
-      return;
     }
     console.log(arr);
-    // arr = [];
 
     setCompletedDistances(arr);
     arr = [];
-    // arr = arr.concat();
-    // console.log("I get here!");
-    // console.log("also users:", race.users);
-    // console.log("comp dist:", completedDistances);
   }
 
   return (
@@ -68,6 +60,9 @@ function Map() {
           <p>{obj.username}</p>
           <p>{obj.distance.toFixed(2)}m</p>
           <ProgressBar completed={obj.distance} raceDist={race.distance} />
+          {obj.id === location.me ? (
+                  <p>{youveFinished}</p>
+                ) : null}
         </div>
       ))}
     </div>

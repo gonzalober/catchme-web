@@ -77,13 +77,14 @@ export default function Lobby() {
         startLong: 0,
         endLat: 0,
         endLong: 0,
-        distance: 0,
+        distance: 9,
         UserId: param,
       },
       refetchQueries: [
         { query: QUERY_RACE, variables: { id: location.RaceId } },
       ],
     }); 
+    console.log("i still create a location :(");
   };
 
   return (
@@ -99,15 +100,15 @@ export default function Lobby() {
             race.users &&
             race.users.map((user) => (
               <li key={user.id}>
-                - {user.username} <button onClick={handleReady(user.id)}>Ready!</button>
+                - {user.username}
                 {user.id === location.me ? (
-                <></>
+                  <button onClick={handleReady(user.id)}>Ready!</button>
                 ) : null}
               </li>
             ))}
         </ol>
         {location.isHost && isEveryoneReady &&
-          <button onClick={setStartTime}><img className="start-button" src={Button} alt="start-button" /> </button>}
+          <button onClick={setStartTime}><img className="start-button" alt="start-button" />Start</button>}
       </div>
       <Footer />
     </div>

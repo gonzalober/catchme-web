@@ -11,6 +11,7 @@ function Race() {
       <DistanceCalculator />
       <Header2/>
         <div className="race-details">
+          <StopwatchAutoStart />
           <Map />
         </div>
       <Footer />
