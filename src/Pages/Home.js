@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import logo from '../images/logo.gif'
 import {Link} from 'react-router-dom';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
+import UIfx from 'uifx';
+import GameOver from '../components/SoundEffects/gameover.mp3'
 
 export default class Home extends Component {
   render() {
+
+    const beep = new UIfx(
+      GameOver,
+      {
+        volume: 0.8,
+        throttleMs: 100
+      }
+    )
+
     return (
     <div className="main-content">
       <div className="header">
@@ -12,7 +23,7 @@ export default class Home extends Component {
         <p>The app that keeps you running</p>
       </div>
       <div className="home-buttons">
-        <button><Link to={"/how-to-play"}>How to play</Link></button>
+        <button onClick={() => beep.play()}><Link to={"/how-to-play"}>How to play</Link></button>
         <button><Link to={"/createrace"}>Create a race</Link></button>
         <button><Link to={"/findrace"}>Find a race</Link></button>
         <button><Link to={"/leaderboard"}>Leaderboard</Link></button>
