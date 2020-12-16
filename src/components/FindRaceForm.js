@@ -19,6 +19,7 @@ export default function FindRace() {
           pathname: './lobby',
           RaceId: parseInt(raceId),
           me: userId,
+          isHost: false,
         })
       },
       variables: { username: username, RaceId: parseInt(raceId) }
