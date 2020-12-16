@@ -59,8 +59,10 @@ export default function DistanceCalculator() {
     const timerHandler = setInterval(() => {
       navigator.geolocation.getCurrentPosition(
         (data) => {
-          let lat = data.coords.latitude;
-          let long = data.coords.longitude;
+          let lat = parseFloat(data.coords.latitude.toFixed(5));
+          let long = parseFloat(data.coords.longitude.toFixed(5));
+          console.log("Latitude:", lat);
+          console.log("Longitude:", long);
           if (shouldRunFirst) {
             setStartCoor({ lat, long });
             setEndCoor({ lat, long });
