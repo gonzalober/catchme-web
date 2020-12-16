@@ -5,9 +5,7 @@ import Header2 from "../components/no-race-header";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
-import Footer from "../components/Footer"
-
-
+import Footer from "../components/Footer";
 
 export default function Lobby() {
   const location = useLocation();
@@ -39,8 +37,14 @@ export default function Lobby() {
         update: (proxy, mutationResult) => {
           //get my location
           for (i = 0; i < race.users.length; i++) {
-            if(race.users[i].id === location.me) {
-              console.log("DETAILS:", race.users[i].location.endLat,race.users[i].location.endLong,race.users[i].location.distance,race.users[i].location.id)
+            if (race.users[i].id === location.me) {
+              console.log(
+                "DETAILS:",
+                race.users[i].location.endLat,
+                race.users[i].location.endLong,
+                race.users[i].location.distance,
+                race.users[i].location.id
+              );
               history.push({
                 pathname: "./race",
                 RaceId: race.id,

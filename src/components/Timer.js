@@ -13,12 +13,11 @@ export default function Timer() {
   });
 
   // const convertTimestamp = () => {
-
   // }
 
   return (
     <div>
       <p>{race.startTime}</p>
     </div>
-  )
+  );
 }
