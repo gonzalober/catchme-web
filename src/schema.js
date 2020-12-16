@@ -1,9 +1,9 @@
 const typeDefs = gql`
   type Race {
     id: Int!
-    distance: Int!
-    startTime: Int
-    endTime: Int
+    distance: Float!
+    startTime: Float
+    endTime: Float
     users: [User]
   }
 
@@ -28,7 +28,7 @@ const typeDefs = gql`
 
   type Score {
     id: Int!
-    time: Int!
+    time: Float!
     user: User!
   }
 
@@ -39,10 +39,11 @@ const typeDefs = gql`
     location(id: Int!): Location!
     score(id: Int!): Score!
     races: [Race]!
+    scores: [Score]!
   }
 
   type Mutation {
-    createRace(distance: Int!, startTime: Int, endTime: Int): Race!
+    createRace(distance: Float!, startTime: Float, endTime: Float): Race!
     createUser(username: String!, position: Int, RaceId: Int!): User!
     createLocation(
       startLat: Float!
@@ -52,12 +53,14 @@ const typeDefs = gql`
       distance: Float!
       UserId: Int!
     ): Location!
-    createScore(time: Int!, UserId: Int!): Score!
+    createScore(time: Float!, UserId: Int!): Score!
     updateUser(id: Int!, position: Int!): User!
-    updateRaceStartTime(id: Int!, startTime: Int!): Race!
-    updateRaceEndTime(id: Int!, endTime: Int!): Race!
+    updateRaceStartTime(id: Int!, startTime: Float!): Race!
+    updateRaceEndTime(id: Int!, endTime: Float!): Race!
     updateLocation(
       id: Int!
+      startLat: Float!
+      startLong: Float!
       endLat: Float!
       endLong: Float!
       distance: Float!
