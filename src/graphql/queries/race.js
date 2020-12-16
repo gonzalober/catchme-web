@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const QUERY_RACE = gql`
   query race($id: Int!) {
@@ -18,6 +18,9 @@ export const QUERY_RACE = gql`
           endLat
           endLong
           distance
+        }
+        score {
+          time
         }
       }
     }

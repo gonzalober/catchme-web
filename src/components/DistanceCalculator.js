@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { UPDATE_LOCATION } from "../graphql/mutations/updateLocation";
 import { QUERY_LOCATION } from "../graphql/queries/location";
+import { CREATE_SCORE } from "../graphql/mutations/createScore";
 
 function distance(lat1, lon1, lat2, lon2) {
   if (lat1 == lat2 && lon1 == lon2) {
@@ -27,6 +28,7 @@ function distance(lat1, lon1, lat2, lon2) {
 }
 
 export default function DistanceCalculator() {
+  const [createScore] = useMutation(CREATE_SCORE);
   const [dist, setDist] = React.useState(null);
   const location = useLocation();
   const history = useHistory();
@@ -35,7 +37,6 @@ export default function DistanceCalculator() {
   let myDistance = location.myDistance;
   let myLocId = location.myLocId;
   let newDistance;
-  let endTime;
 
   const [updateLocation] = useMutation(UPDATE_LOCATION);
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
@@ -45,6 +46,23 @@ export default function DistanceCalculator() {
       await updateDistanceAndLocation(myEndLat, myEndLong, myDistance, myLocId);
     },
   });
+  let userRaceTime;
+  let userIds;
+  for (let i = 0; i < race.users.length; i++) {
+    console.log(race.users[i].location.distance);
+    console.log(race.users[i].id);
+
+    if (race.users[i].location.distance > race.distance) {
+      userIds = race.users[i].id;
+      userRaceTime = Date.now() - race.startTime;
+      createScore({
+        variables: {
+          time: userRaceTime,
+          UserId: userIds,
+        },
+      });
+    }
+  }
 
   const updateDistanceAndLocation = (lat, long, dist, id) => {
     navigator.geolocation.getCurrentPosition(
@@ -59,7 +77,8 @@ export default function DistanceCalculator() {
         newDistance = dist + distance(lat, long, currentLat, currentLong);
         setDist(newDistance);
         console.log(race.distance);
-        if (dist > 5) {
+        //just for test purposes
+        if (dist > 100) {
           history.push({
             pathname: "/race-end",
           });
@@ -88,9 +107,9 @@ export default function DistanceCalculator() {
         // console.log("New end long:", startLong);
         console.log("Distance is: ", newDistance);
         console.log("Location id is:", id);
-        setTimeout(function () {
-          updateDistanceAndLocation(startLat, startLong, newDistance, id);
-        }, 3000);
+        // setTimeout(function () {
+        //   updateDistanceAndLocation(startLat, startLong, newDistance, id);
+        // }, 3000);
       },
       (error) => console.log(error),
       {
@@ -99,5 +118,17 @@ export default function DistanceCalculator() {
     );
   };
 
-  return <></>;
+  return (
+    <div>
+      Score:
+      {race &&
+        race.users &&
+        race.users.map((user) => (
+          <li key={user.id}>
+            <>{user.username}</>
+            {user.score?.time}
+          </li>
+        ))}
+    </div>
+  );
 }

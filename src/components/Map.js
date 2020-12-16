@@ -16,7 +16,6 @@ function Map() {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: "network-only",
     onCompleted: async () => {
-      // console.log("users: ", users);
       await changeState();
     },
   });
@@ -42,7 +41,15 @@ function Map() {
       //   }
       // )
     }
-
+    console.log(users);
+    if (users.every((user) => user.score)) {
+      history.push({
+        pathname: "/race-end",
+        RaceId: race.id,
+        me: location.me,
+      });
+      return;
+    }
     console.log(arr);
     // arr = [];
 
@@ -56,16 +63,13 @@ function Map() {
 
   return (
     <div>
-
-
-        {completedDistances.map((obj) => (
-          <div key={obj.id}>
-            <p>{obj.username}</p>
-            <p>{obj.distance.toFixed(2)}m</p>
-            <ProgressBar completed={obj.distance} raceDist={race.distance} />   
-          </div>         
-        ))}
-
+      {completedDistances.map((obj) => (
+        <div key={obj.id}>
+          <p>{obj.username}</p>
+          <p>{obj.distance.toFixed(2)}m</p>
+          <ProgressBar completed={obj.distance} raceDist={race.distance} />
+        </div>
+      ))}
     </div>
   );
 }
