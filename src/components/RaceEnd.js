@@ -35,7 +35,7 @@ export default function RaceEnd() {
             race.users.find((user) => user.id === location.me).score.time}
         </p>
         <p>Time of the Race:{race && maxScore()}</p>
-        <p>Score: {}</p>
+        <p>Score: {race && race.users[0].score.time}</p>
         <button
           onClick={() => {
             history.push({

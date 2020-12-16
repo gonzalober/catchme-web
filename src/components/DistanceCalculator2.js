@@ -11,6 +11,7 @@ import ApolloClient from "apollo-boost";
 const client = new ApolloClient({
   uri: "https://catchme-server.herokuapp.com/",
 });
+
 function computeDistance(lat1, lon1, lat2, lon2) {
   console.log(lat1, lon1, lat2, lon2);
   if (lat1 == lat2 && lon1 == lon2) {
@@ -37,15 +38,63 @@ export default function DistanceCalculator() {
   const location = useLocation();
   const [updateLocation] = useMutation(UPDATE_LOCATION);
   const [createScore] = useMutation(CREATE_SCORE);
-  let { myLocId } = location;
+  let myLocId = location.myLocId;
   const [first, setFirst] = useState(true);
   const [distance, setDistance] = useState(0);
   // const [startLong, setStartLong] = useState(0);
   // const [startLat, setStartLat] = useState(0);
-  const [startCoor, setStartCoor] = useState({ lat: 0, long: 0 });
+  const [startCoor, setStartCoor] = useState({
+    lat: 0,
+    long: 0,
+  });
   // const [endLong, setEndLong] = useState(0);
   // const [endLat, setEndLat] = useState(0);
-  const [endCoor, setEndCoor] = useState({ lat: 0, long: 0 });
+  const [endCoor, setEndCoor] = useState({
+    lat: 0,
+    long: 0,
+  });
+
+  useEffect(() => {
+    let shouldRunFirst = true;
+    const timerHandler = setInterval(() => {
+      navigator.geolocation.getCurrentPosition(
+        (data) => {
+          let lat = data.coords.latitude;
+          let long = data.coords.longitude;
+          if (shouldRunFirst) {
+            setStartCoor({ lat, long });
+            setEndCoor({ lat, long });
+            setFirst(false);
+            shouldRunFirst = false;
+          } else {
+            setEndCoor({ lat, long });
+          }
+        },
+        (error) => console.log(error),
+        {
+          enableHighAccuracy: true,
+        }
+      );
+    }, 3000);
+    return () => {
+      clearInterval(timerHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!first) {
+      setDistance(
+        distance +
+          computeDistance(
+            startCoor.lat,
+            startCoor.long,
+            endCoor.lat,
+            endCoor.long
+          )
+      );
+      setStartCoor({ ...endCoor });
+    }
+  }, [first, endCoor]);
 
   useEffect(async () => {
     console.log("------_HEREH--------");
@@ -89,46 +138,6 @@ export default function DistanceCalculator() {
       }
     }
   }, [first, distance]);
-  useEffect(() => {
-    if (!first) {
-      setDistance(
-        distance +
-          computeDistance(
-            startCoor.lat,
-            startCoor.long,
-            endCoor.lat,
-            endCoor.long
-          )
-      );
-      setStartCoor({ ...endCoor });
-    }
-  }, [first, endCoor]);
-  useEffect(() => {
-    let shouldRunFirst = true;
-    const timerHandler = setInterval(() => {
-      navigator.geolocation.getCurrentPosition(
-        (data) => {
-          let lat = data.coords.latitude;
-          let long = data.coords.longitude;
-          if (shouldRunFirst) {
-            setStartCoor({ lat, long });
-            setEndCoor({ lat, long });
-            setFirst(false);
-            shouldRunFirst = false;
-          } else {
-            setEndCoor({ lat, long });
-          }
-        },
-        (error) => console.log(error),
-        {
-          enableHighAccuracy: true,
-        }
-      );
-    }, 3000);
-    return () => {
-      clearInterval(timerHandler);
-    };
-  }, []);
 
   return <></>;
 }
