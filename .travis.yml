@@ -3,5 +3,5 @@ node_js:
   - "stable"
 
 script:
-  - yarn start
+  - yarn build
   - yarn run cy:run
