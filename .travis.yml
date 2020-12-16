@@ -7,5 +7,6 @@ cache:
     - ~/.cache
 script:
   - yarn install
+  - yarn cypress install
   - yarn build
   - yarn run cy:run
