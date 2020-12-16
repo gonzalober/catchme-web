@@ -55,6 +55,7 @@ export default function Lobby() {
           history.push({
             pathname: "./race",
             RaceId: race.id,
+            raceDistance: race.distance,
             me: location.me,
             myEndLat: race.users[k].location.endLat,
             myEndLong: race.users[k].location.endLong,
