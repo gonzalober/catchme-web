@@ -6,6 +6,7 @@ import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 import Footer from "../components/Footer"
+import Button from "../images/start-button.gif"
 
 export default function Lobby() {
   //define variables
@@ -99,9 +100,9 @@ export default function Lobby() {
             race.users &&
             race.users.map((user) => (
               <li key={user.id}>
-                - {user.username} <button onClick={handleReady(user.id)}>Ready!</button>
+                - {user.username} 
                 {user.id === location.me ? (
-                <></>
+                  <button onClick={handleReady(user.id)}>Ready!</button>
                 ) : null}
               </li>
             ))}
