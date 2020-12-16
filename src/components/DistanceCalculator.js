@@ -4,7 +4,31 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { UPDATE_LOCATION } from "../graphql/mutations/updateLocation";
 import { QUERY_LOCATION } from "../graphql/queries/location";
+import { CREATE_SCORE } from "../graphql/mutations/createScore";
+
+function distance(lat1, lon1, lat2, lon2) {
+  if (lat1 == lat2 && lon1 == lon2) {
+    return 0;
+  } else {
+    var radlat1 = (Math.PI * lat1) / 180;
+    var radlat2 = (Math.PI * lat2) / 180;
+    var theta = lon1 - lon2;
+    var radtheta = (Math.PI * theta) / 180;
+    var dist =
+      Math.sin(radlat1) * Math.sin(radlat2) +
+      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = (dist * 180) / Math.PI;
+    dist = dist * 60 * 1.1515 * 1609.344;
+    return dist;
+  }
+}
+
 export default function DistanceCalculator() {
+  const [createScore] = useMutation(CREATE_SCORE);
   const [dist, setDist] = React.useState(null);
   const location = useLocation();
   const history = useHistory();
@@ -14,28 +38,6 @@ export default function DistanceCalculator() {
   let myLocId = location.myLocId;
   let newDistance;
 
-
-  function distance(lat1, lon1, lat2, lon2) {
-    if (lat1 == lat2 && lon1 == lon2) {
-      return 0;
-    } else {
-      var radlat1 = (Math.PI * lat1) / 180;
-      var radlat2 = (Math.PI * lat2) / 180;
-      var theta = lon1 - lon2;
-      var radtheta = (Math.PI * theta) / 180;
-      var dist =
-        Math.sin(radlat1) * Math.sin(radlat2) +
-        Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      dist = (dist * 180) / Math.PI;
-      dist = dist * 60 * 1.1515 * 1609.344;
-      return dist;
-    }
-  }
-
   const [updateLocation] = useMutation(UPDATE_LOCATION);
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
     variables: { id: location.RaceId },
@@ -44,6 +46,23 @@ export default function DistanceCalculator() {
       await updateDistanceAndLocation(myEndLat, myEndLong, myDistance, myLocId);
     },
   });
+  let userRaceTime;
+  let userIds;
+  for (let i = 0; i < race.users.length; i++) {
+    console.log(race.users[i].location.distance);
+    console.log(race.users[i].id);
+
+    if (race.users[i].location.distance > race.distance) {
+      userIds = race.users[i].id;
+      userRaceTime = Date.now() - race.startTime;
+      createScore({
+        variables: {
+          time: userRaceTime,
+          UserId: userIds,
+        },
+      });
+    }
+  }
 
   const updateDistanceAndLocation = (lat, long, dist, id) => {
     navigator.geolocation.getCurrentPosition(
@@ -57,6 +76,14 @@ export default function DistanceCalculator() {
         //distance calculation -> should give some number
         newDistance = dist + distance(lat, long, currentLat, currentLong);
         setDist(newDistance);
+        console.log(race.distance);
+        //just for test purposes
+        if (dist > 100) {
+          history.push({
+            pathname: "/race-end",
+          });
+          return;
+        }
         //update the users location in db
         updateLocation({
           variables: {
@@ -80,9 +107,9 @@ export default function DistanceCalculator() {
         // console.log("New end long:", startLong);
         console.log("Distance is: ", newDistance);
         console.log("Location id is:", id);
-        setTimeout(function() {
-          updateDistanceAndLocation(startLat, startLong, newDistance, id);
-        }, 3000)
+        // setTimeout(function () {
+        //   updateDistanceAndLocation(startLat, startLong, newDistance, id);
+        // }, 3000);
       },
       (error) => console.log(error),
       {
@@ -90,8 +117,18 @@ export default function DistanceCalculator() {
       }
     );
   };
+
   return (
-    <>
-    </>
+    <div>
+      Score:
+      {race &&
+        race.users &&
+        race.users.map((user) => (
+          <li key={user.id}>
+            <>{user.username}</>
+            {user.score?.time}
+          </li>
+        ))}
+    </div>
   );
 }

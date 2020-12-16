@@ -14,11 +14,9 @@ function Map() {
     variables: { id: location.RaceId },
     pollInterval: 2000,
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
     onCompleted: async () => {
-        
-        // console.log("users: ", users);
-        await changeState();
+      await changeState();
     },
   });
 
@@ -31,13 +29,11 @@ function Map() {
     for (i = 0; i < users.length; i++) {
       // console.log("user:", users[i]);
       // console.log("distance of a user:", users[i].distance);
-      arr.push(
-        {
-          id: users[i].id,
-          username: users[i].username,
-          distance: users[i].location.distance,
-        }
-      )
+      arr.push({
+        id: users[i].id,
+        username: users[i].username,
+        distance: users[i].location.distance,
+      });
       // arr.push(
       //   {
       //     id: users[i].id,
@@ -45,27 +41,35 @@ function Map() {
       //   }
       // )
     }
-
+    console.log(users);
+    if (users.every((user) => user.score)) {
+      history.push({
+        pathname: "/race-end",
+        RaceId: race.id,
+        me: location.me,
+      });
+      return;
+    }
     console.log(arr);
     // arr = [];
 
-    setCompletedDistances(arr); 
+    setCompletedDistances(arr);
     arr = [];
     // arr = arr.concat();
-    // console.log("I get here!"); 
+    // console.log("I get here!");
     // console.log("also users:", race.users);
     // console.log("comp dist:", completedDistances);
   }
 
   return (
     <div>
-        {completedDistances.map((obj) => (
-          <div key={obj.id}>
-            <p>{obj.username}</p>
-            <p>{obj.distance.toFixed(2)}m</p>
-            <ProgressBar completed={obj.distance} raceDist={race.distance} />   
-          </div>         
-        ))}
+      {completedDistances.map((obj) => (
+        <div key={obj.id}>
+          <p>{obj.username}</p>
+          <p>{obj.distance.toFixed(2)}m</p>
+          <ProgressBar completed={obj.distance} raceDist={race.distance} />
+        </div>
+      ))}
     </div>
   );
 }

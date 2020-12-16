@@ -26,6 +26,7 @@ export default function CreateRaceForm() {
               pathname: "./lobby",
               RaceId: raceId,
               me: userId,
+              isHost: true,
             });
           },
           variables: { username: username, RaceId: raceId },

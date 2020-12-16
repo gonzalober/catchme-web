@@ -7,20 +7,25 @@ import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 import Footer from "../components/Footer"
 
-
-
 export default function Lobby() {
+  //define variables
+  const [isEveryoneReady, setIsEveryoneReady] = React.useState(false);
   const location = useLocation();
+  const history = useHistory();
+  //define race query and mutations
   const { data: { race } = {} } = useQuery(QUERY_RACE, {
     variables: { id: location.RaceId },
     pollInterval: 2000,
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onCompleted: async () => {
+      await checkReady();
+      await checkStarted();
+    }
   });
   const [createLocation] = useMutation(CREATE_LOCATION);
   const [updateRaceStartTime] = useMutation(UPDATE_RACE_START_TIME);
-  const history = useHistory();
-  console.log(race);
-  console.log("race:", location.RaceId);
-  console.log("user:", location.me);
+  
   const checkReady = () => {
     let i;
     let readyCounter = 0;
@@ -30,66 +35,57 @@ export default function Lobby() {
       }
     }
     if (readyCounter === race.users.length) {
-      //give the race a start time
-      updateRaceStartTime({
-        variables: {
-          id: location.RaceId,
-          startTime: Date.now(),
-        },
-        update: (proxy, mutationResult) => {
-          //get my location
-          for (i = 0; i < race.users.length; i++) {
-            if(race.users[i].id === location.me) {
-              console.log("DETAILS:", race.users[i].location.endLat,race.users[i].location.endLong,race.users[i].location.distance,race.users[i].location.id)
-              history.push({
-                pathname: "./race",
-                RaceId: race.id,
-                me: location.me,
-                myEndLat: race.users[i].location.endLat,
-                myEndLong: race.users[i].location.endLong,
-                myDistance: race.users[i].location.distance,
-                myLocId: race.users[i].location.id,
-              });
-            }
-          }
-        },
-      });
+      setIsEveryoneReady(true);
     } else {
-      console.log("Not everyone is ready yet!");
-      readyCounter = 0;
+      setIsEveryoneReady(false);
     }
   };
-  let lat;
-  let lng;
-  const handleReady = (param) => (e) => {
-    // e.preventDefault();
-    navigator.geolocation.getCurrentPosition(
-      (data) => {
-        console.log(data);
-        lat = data.coords.latitude;
-        lng = data.coords.longitude;
-        console.log(lat);
-        console.log(lng);
-        createLocation({
-          variables: {
-            startLat: lat,
-            startLong: lng,
-            endLat: lat,
-            endLong: lng,
-            distance: 0,
-            UserId: param,
-          },
-          refetchQueries: [
-            { query: QUERY_RACE, variables: { id: location.RaceId } },
-          ],
-        });
-      },
-      (error) => console.log(error),
-      {
-        enableHighAccuracy: true,
+
+  const checkStarted = () => {
+    if(race.startTime != null) {
+      let k;
+      for (k = 0; k < race.users.length; k++) {
+        if(race.users[k].id === location.me) {
+          console.log("DETAILS:", race.users[k].location.endLat,race.users[k].location.endLong,race.users[k].location.distance,race.users[k].location.id)
+          history.push({
+            pathname: "./race",
+            RaceId: race.id,
+            me: location.me,
+            myEndLat: race.users[k].location.endLat,
+            myEndLong: race.users[k].location.endLong,
+            myDistance: race.users[k].location.distance,
+            myLocId: race.users[k].location.id,
+          });
+        }
       }
-    );
+    }
+  }
+
+  const setStartTime = () => {
+    updateRaceStartTime({
+      variables: {
+        id: location.RaceId,
+        startTime: Date.now(),
+      },
+    });
+  }
+
+  const handleReady = (param) => (e) => {
+    createLocation({
+      variables: {
+        startLat: 0,
+        startLong: 0,
+        endLat: 0,
+        endLong: 0,
+        distance: 0,
+        UserId: param,
+      },
+      refetchQueries: [
+        { query: QUERY_RACE, variables: { id: location.RaceId } },
+      ],
+    }); 
   };
+
   return (
     <div className="main-content">
       <Header2 />
@@ -110,7 +106,8 @@ export default function Lobby() {
               </li>
             ))}
         </ol>
-        <button onClick={checkReady}><img className="start-button" src={Button} alt="start-button" /> </button>
+        {location.isHost && isEveryoneReady &&
+          <button onClick={setStartTime}><img className="start-button" src={Button} alt="start-button" /> </button>}
       </div>
       <Footer />
     </div>
