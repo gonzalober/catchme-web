@@ -1,7 +1,10 @@
 language: node_js
 node_js:
   - "stable"
-
+cache:
+  npm: true
+  directories:
+    - ~/.cache
 script:
   - yarn install
   - yarn build
