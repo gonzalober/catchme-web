@@ -63,11 +63,6 @@ class StopwatchAutoStart extends React.Component {
         <h2 ref="header">Stopwatch</h2>
         {this.state.running === false}
         {this.start()}
-
-        {
-          <button onClick={this.stop}>STOP</button>
-        }
-        <button onClick={this.reset}>RESET</button>
         <StopwatchDisplay
           ref="display"
           {...this.state}
