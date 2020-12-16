@@ -75,6 +75,7 @@ export default function Lobby() {
     });
   };
   const handleReady = (param) => (e) => {
+    navigator.geolocation.getCurrentPosition((data) => {});
     createLocation({
       variables: {
         startLat: 0,
