@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import StopwatchDisplay from './StopwatchDisplay';
-import StopwatchHistory from './StopwatchHistory';
 
 class StopwatchAutoStart extends React.Component {
   constructor(props) {
@@ -26,14 +24,14 @@ class StopwatchAutoStart extends React.Component {
     return value;
   };
 
-  start() {
+  start = () =>  {
     if (!this.state.running) {
       this.setState({ running: true });
       this.watch = setInterval(() => this.pace(), 10);
     }
   };
 
-  stop() {
+  stop = () => {
     this.setState({ running: false });
     clearInterval(this.watch);
   };
@@ -56,25 +54,27 @@ class StopwatchAutoStart extends React.Component {
       currentTimeSec: 0,
       currentTimeMin: 0,
     });
+    this.stop();
+    this.start();
   };
+
+  componentDidMount() {
+    this.start();
+  }
+
+  componentWillUnmount() {
+    this.stop()
+  }
 
   render() {
     return (
       <div className={'stopwatch'}>
         <h2 ref="header">Stopwatch</h2>
-        {this.state.running === false}
-        {this.start()}
-
-        {
-          <button onClick={this.stop}>STOP</button>
-        }
-        <button onClick={this.reset}>RESET</button>
         <StopwatchDisplay
           ref="display"
           {...this.state}
           formatTime={this.formatTime}
         />
-        <StopwatchHistory {...this.state} formatTime={this.formatTime} />
       </div>
     );
   }

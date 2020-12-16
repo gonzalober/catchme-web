@@ -78,7 +78,8 @@ export default function CreateRaceForm() {
           </label>
           </div>
         <div onChange={handleNameChange} className="form-input">
-          <input type="text" defaultValue="" placeholder="User Name:" />
+          <p>Enter your name: </p>
+          <input type="text" defaultValue=""/>
         </div>
         <input className="form-submit" type="submit" value="Create Race" />
       </form>

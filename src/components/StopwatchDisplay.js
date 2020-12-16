@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class StopwatchDisplay extends React.Component {
   render() {
@@ -13,5 +14,12 @@ class StopwatchDisplay extends React.Component {
     );
   }
 }
+
+StopwatchDisplay.propTypes = {
+  formatTime: PropTypes.func,
+  currentTimeMin: PropTypes.number,
+  currentTimeSec: PropTypes.number,
+  currentTimeMs: PropTypes.number,
+};
 
 export default StopwatchDisplay;

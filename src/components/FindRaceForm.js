@@ -47,7 +47,7 @@ export default function FindRace() {
         <p>Enter your name: </p>
         <input type="text" defaultValue=""/>
       </div>
-      <input type="submit" value="Find Race"/>
+      <input className="race-submit" type="submit" value="Find Race"/>
     </form>
   );
 }

@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import Header2 from "../components/no-race-header";
+import Header2 from "../components/Header2";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
@@ -103,14 +103,14 @@ export default function Lobby() {
             race.users &&
             race.users.map((user) => (
               <li key={user.id}>
-                {user.username}
+                - {user.username} <button onClick={handleReady(user.id)}>Ready!</button>
                 {user.id === location.me ? (
-                  <button onClick={handleReady(user.id)}>Ready!</button>
+                <></>
                 ) : null}
               </li>
             ))}
         </ol>
-        <button onClick={checkReady}>Start Race</button>
+        <button onClick={checkReady}><img className="start-button" src={Button} alt="start-button" /> </button>
       </div>
       <Footer />
     </div>

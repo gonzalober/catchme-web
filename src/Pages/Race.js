@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import Header2 from '../components/no-race-header';
+import Header2 from '../components/Header2';
 import DistanceCalculator from "../components/DistanceCalculator";
 import Map from "../components/Map";
 import  Footer from '../components/Footer';

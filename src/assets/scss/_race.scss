@@ -1,15 +1,21 @@
-.kiril-head {
-  border-radius: 50%;
-  width: 15%;
-}
-
 .race-finder {
+  h2 {
+    margin-bottom: 20%;
+  }
   grid-row: 2 / 3;
-  margin-top: 13%;
+  margin-top: 8%;
+  input[type=text],
+  [type=submit] {
+    height: 30px;
+    width: 70%;
+    font-size: 20px;
+  }
 }
-
-// race 
-
+.race-submit{
+  margin-top: 6%;
+  font-size: 20px;
+}
+// race
 .race-details {
   height: 100vh;
 }

@@ -4,11 +4,11 @@ $radioActive: #5d9bfb;
 
 .form{
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   flex-direction: column;
   align-content: center;
   .radio {
-    text-align: center;  
+    text-align: center;
     margin: 2% auto;
     display: block;
     cursor: pointer;
@@ -79,12 +79,17 @@ $radioActive: #5d9bfb;
 
 .form-input {
   margin: 2%;
+  p{
+    margin-top: 10%;
+  }
   input{
     font-size: x-large;
+    width: 80%;
+    margin-bottom: 5%;
   }
 }
 .form-submit {
-  width: 41%;
+  width: fit-content;
   margin: 0 auto;
   font-size: x-large;
 }
@@ -95,7 +100,7 @@ $radioActive: #5d9bfb;
   align-items: center;
   align-content: center;
   height: 100%;
- 
+
   .form{
     justify-self: center;
     align-self: center;
