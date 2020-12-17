@@ -1,9 +1,11 @@
 # CatchMe [![Build Status](https://travis-ci.com/gonzalober/catchme-web.svg?branch=master)](https://travis-ci.com/gonzalober/catchme-web)
 
+![Logo](src/assets/images/logo.gif)
+
 CatchMe is a web application that allows you to race with your friends remotely, no login needed!
 CatchMe was made as a 2-week final project at Makers Academy. We are [Kiril](https://github.com/kiriarf), [Gonzalo](https://github.com/gonzalober), [David](https://github.com/dm-devtech) and [Mace](https://github.com/mace-akkari).
 
-This repo includes the GraphQL API, which serves as our backend. You can find our frontend, built in ReactJS, [here](https://github.com/gonzalober/catchme-web)
+This is our frontend repo built in ReactJS. You can find our backend repo which includes the GraphQL API, [here](https://github.com/kiriarf/catchme-server)
 
 [Demo Video](https://www.youtube.com/watch?v=2YuvLhf_QO8&feature=youtu.be)
 
