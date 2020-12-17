@@ -37,6 +37,7 @@ During the race, the users' real-time position will be tracked and a travel dist
 
 When your distance changes, it will be reflected in the progress bar. You will also see the distance displayed in meters.
 If you are lucky to finish first, the app will congratulate you. Now you have to wait for the others to finish...
+
 ![Race PageII](screenshots/CatchMeRaceII.png)
 
 Once everybody crosses the finish line, you will be taken to a separate page with the race results.
