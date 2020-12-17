@@ -57,7 +57,6 @@ export default class Home extends Component {
           <img className="running-boy" src={logo} alt="Logo" />
         </div>
         <Footer />
-      </div>
       <div className="home-buttons">
         <button onClick={() =>  Bruh.play()}><Link to={"/how-to-play"}>How to play</Link></button>
         <button onClick={() =>  Click.play()}><Link to={"/createrace"}>Create a race</Link></button>
