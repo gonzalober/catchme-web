@@ -7,6 +7,8 @@ import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 import Footer from "../components/Footer"
 import Button from "../images/start-button.gif"
+// import CLI from '../components/SoundEffects/Button-sound.mp3'
+// import UIfx from 'uifx';
 
 export default function Lobby() {
   //define variables
@@ -86,6 +88,20 @@ export default function Lobby() {
       ],
     }); 
   };
+
+  // const Click = new UIfx(
+  //   CLI,
+  //   {
+  //     volume: 0.8,
+  //     throttleMs: 100
+  //   }
+  // )
+ 
+  // const handleClick = () => {
+  //   handleReady(user.id);
+  //   Click.play();
+  // }
+  
 
   return (
     <div className="main-content">
