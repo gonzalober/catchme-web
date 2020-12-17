@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from "react";
-import DistanceCalculator from "../components/DistanceCalculator2";
+import React from "react";
+import DistanceCalculator from "../components/DistanceCalculator";
 import Header2 from "../components/Header2";
 import Map from "../components/Map";
 import Footer from "../components/Footer";

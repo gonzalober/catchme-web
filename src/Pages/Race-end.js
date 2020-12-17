@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header2 from "../components/Header2";
 import Footer from "../components/Footer";
-import ScoreCalculator from "../components/RaceEnd";
+import ScoreCalculator from "../components/ScoreCalculator";
 
 export default class RaceEnd extends Component {
   render() {
