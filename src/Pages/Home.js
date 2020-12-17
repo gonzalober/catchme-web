@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import UIfx from 'uifx';
 import BRUH from '../assets/SoundEffects/Bruh.MP3'
 import CLI from '../assets/SoundEffects/buttonClick.mp3'
+import theme from '../assets/SoundEffects/catchMe.mp3'
 
 
 export default class Home extends Component {
@@ -28,6 +29,7 @@ export default class Home extends Component {
 
     return (
       <div className="main-content">
+        
         <div className="header">
           <h1>CatchMe</h1>
           <p>The app that keeps you running</p>
