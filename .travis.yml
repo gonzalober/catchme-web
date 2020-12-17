@@ -1,7 +1,12 @@
 language: node_js
 node_js:
   - "stable"
-
+cache:
+  npm: true
+  directories:
+    - ~/.cache
 script:
-  - yarn cy:run
-  - yarn run build
+  - yarn install
+  - yarn cypress install
+  - yarn build
+  - yarn run cy:run
