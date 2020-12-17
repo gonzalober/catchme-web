@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../images/logo.gif'
+import logo from '../assets/images/logo.gif'
 import {Link} from 'react-router-dom';
 import Footer from '../components/Footer';
 import UIfx from 'uifx';

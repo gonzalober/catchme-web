@@ -6,7 +6,7 @@ import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 import Footer from "../components/Footer";
-import Button from "../images/start-button.gif"
+import Button from "../assets/images/start-button.gif"
 import CLI from '../assets/SoundEffects/Button-sound.mp3'
 import UIfx from 'uifx';
 

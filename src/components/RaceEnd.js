@@ -56,16 +56,23 @@ export default function RaceEnd() {
         </Tr>
       </Tbody>
     </Table>
-    <div>
-      Score:{" "}
-      {race.users.map((obj) => (
-        <div key={obj.id}>
-          <p>
-            {obj.username} = {msToTime(parseInt(obj.score.time.toFixed(2)))}
-          </p>
-        </div>
-      ))}
-    </div>
+    <h1>Leaderboard</h1>
+    <Table>
+      <Thead>
+        <Tr >
+          <Th>Name:</Th>
+          <Th>Score:</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        {race.users.map((obj) => (
+          <Tr style={border} key={obj.id}>
+            <Td>{obj.username}</Td>
+            <Td>{msToTime(parseInt(obj.score.time.toFixed(2)))}</Td>
+          </Tr>
+        ))}
+      </Tbody>
+    </Table>
     </div>
   );
 }

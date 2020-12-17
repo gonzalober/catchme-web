@@ -1,5 +1,4 @@
 import React from "react";
-import runner from "../images/stickperson.gif";
 import PropTypes from 'prop-types';
 
 

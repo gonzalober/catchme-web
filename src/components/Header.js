@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import home from '../images/home-button.svg'
-import plus from '../images/plus-sign.svg'
+import home from '../assets/images/home-button.svg'
+import plus from '../assets/images/plus-sign.svg'
 
 export default class Header extends Component {
   render() {
