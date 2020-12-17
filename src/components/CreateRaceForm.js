@@ -3,6 +3,8 @@ import { useMutation } from "@apollo/react-hooks";
 import { CREATE_RACE } from "../graphql/mutations/createRace";
 import { CREATE_USER } from "../graphql/mutations/createUser";
 import { useHistory } from "react-router-dom";
+import CLI from '../components/SoundEffects/Button-sound.mp3'
+import UIfx from 'uifx';
 
 export default function CreateRaceForm() {
   const [distance, setDistance] = React.useState("500");
@@ -39,6 +41,14 @@ export default function CreateRaceForm() {
   const handleClick = () => {
     history.push("./Lobby");
   };
+
+  const Click = new UIfx(
+    CLI,
+    {
+      volume: 0.8,
+      throttleMs: 100
+    }
+  )
 
   const handleRadioChange = (event) => {
     setDistance(event.target.value);
@@ -82,7 +92,7 @@ export default function CreateRaceForm() {
           <p>Enter your name: </p>
           <input type="text" defaultValue=""/>
         </div>
-        <input className="form-submit" type="submit" value="Create Race" />
+        <input onClick={() =>  Click.play()} className="form-submit" type="submit" value="Create Race" />
       </form>
     </div>
   );

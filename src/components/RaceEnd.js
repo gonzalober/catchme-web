@@ -2,6 +2,15 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { useLocation, useHistory } from "react-router-dom";
 import { QUERY_RACE } from "../graphql/queries/race";
+import { CREATE_SCORE } from "../graphql/mutations/createScore";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+
+const border = {
+  borderColor: 'white',
+  marginBottom: '20px',
+  fontSize: 'small'
+}
 
 export default function RaceEnd() {
   const location = useLocation();
@@ -28,23 +37,35 @@ export default function RaceEnd() {
   }
 
   return (
-    <div className="main-content">
       <div className="lobby-page">
-        <h1>Race Complete!</h1>
-        <p>Race code: {race?.id}</p>
-        <p>Distance completed: {race && race.distance}m</p>
-        <p>Time of the Race: {race && msToTime(maxScore())}</p>
-        <div>
-          Score:{" "}
-          {race.users.map((obj) => (
-            <div key={obj.id}>
-              <p>
-                {obj.username} = {parseInt(obj.score.time.toFixed(2))}
-              </p>
-            </div>
-          ))}
+      <h1>Race Complete!</h1>
+      <Table>
+      <Thead>
+        <Tr >
+          <Th>Distance:</Th>
+          <Th>Time:</Th>
+          <Th>Score:</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr style={border}>
+          <Td>{race && race.distance}m</Td>
+          <Td>{race && maxScore()}</Td>
+          <Td>{race && 
+                    race.users.find((user) => user.id === location.me).score.time}</Td>
+        </Tr>
+      </Tbody>
+    </Table>
+    <div>
+      Score:{" "}
+      {race.users.map((obj) => (
+        <div key={obj.id}>
+          <p>
+            {obj.username} = {parseInt(obj.score.time.toFixed(2))}
+          </p>
         </div>
-      </div>
+      ))}
+    </div>
     </div>
   );
 }
