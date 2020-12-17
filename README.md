@@ -5,7 +5,7 @@ CatchMe was made as a 2-week final project at Makers Academy. We are [Kiril](htt
 
 This repo includes the GraphQL API, which serves as our backend. You can find our frontend, built in ReactJS, [here](https://github.com/gonzalober/catchme-web)
 
-[Demo Video](https://github.com/gonzalober/catchme-web)
+[Demo Video](https://www.youtube.com/watch?v=2YuvLhf_QO8&feature=youtu.be)
 
 [Play CatchMe Here!](https://appcatchme.herokuapp.com)
 
