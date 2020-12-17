@@ -6,7 +6,7 @@ describe('Testing Find Race Page', function() {
       cy.visit('/findrace')
       cy.get('input').contains('Find Race').click()
       cy.location('pathname').should('include', 'findrace')
-      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+      cy.readFile('src/assets/SoundEffects/buttonClick.mp3', 'base64').then((mp3) => {
         const uri = 'data:audio/mp3;base64,' + mp3
         const audio = new Audio(uri)
 
@@ -27,7 +27,7 @@ describe('Testing Find Race Page', function() {
       cy.visit('/findrace')
       cy.get('input').contains('Find Race')
       cy.location('pathname').should('include', 'findrace')
-      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+      cy.readFile('src/assets/SoundEffects/buttonClick.mp3', 'base64').then((mp3) => {
         const uri = 'data:audio/mp3;base64,' + mp3
         const audio = new Audio(uri)
 
@@ -45,7 +45,6 @@ describe('Testing Find Race Page', function() {
       cy.get('h1').contains('CatchMe')
       cy.get('[alt="home-icon"]').should('be.visible')
       cy.get('p').contains('Code: 230')
-      cy.get('p').contains('Distance: 50m')
       cy.get('li').contains('Jimmy')
       cy.get('button').contains('Ready!')
       cy.get('p').contains('KiMaGoDa')
