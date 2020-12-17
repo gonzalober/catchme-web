@@ -36,6 +36,7 @@
 
 .home-buttons {
   grid-row: 2 / 3;
+  margin-top: -13%;
   button {
     grid-row: 2 / 3;
     font-family: 'Press Start 2P', cursive;
@@ -47,13 +48,19 @@
 }
 
 .race-end {
+  background-image: url(../../images/finish-line.png);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: bottom;
+  background-size: 154% 58%;;
   color: white;
   text-align: center;
 }
 
 .running-boy{
   width: 58%;
-  margin-top: -15%;
+  margin-top: -9%;
+  margin-left: -21%;
 }
 
 .race {

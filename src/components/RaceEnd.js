@@ -2,9 +2,17 @@ import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { QUERY_RACE } from "../graphql/queries/race";
-import Header2 from "../components/Header2";
 import { CREATE_SCORE } from "../graphql/mutations/createScore";
-import Footer from "../components/Footer";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+
+const border = {
+  borderColor: 'white',
+  marginBottom: '20px',
+  fontSize: 'x-large',
+  fontFamily: 'Roboto'
+}
+
 
 export default function RaceEnd() {
   const location = useLocation();
@@ -22,17 +30,30 @@ export default function RaceEnd() {
   };
 
   return (
-    <div className="main-content">
       <div className="lobby-page">
-        <h1>Race Complete!</h1>
-        <p>Race code: {race?.id}</p>
-        <p>Distance completed: {race && race.distance}m</p>
-        <p>Start Time: {race && race.startTime}</p>
-        <p>Time of the Race:{race && maxScore()}</p>
-        <p>Score: {race && 
-                    race.users.find((user) => user.id === location.me).score.time}
-        </p>
-        <button
+      <Table>
+      <Thead>
+        <Tr >
+          <Th >Race Code:</Th>
+          <Th>Distance:</Th>
+          <Th>Start Time:</Th>
+          <Th>Time:</Th>
+          <Th>Score:</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr style={border}>
+          <Td>{race?.id}</Td>
+          <Td>{race && race.distance}m</Td>
+          <Td>{race && race.startTime}</Td>
+          <Td>{race && maxScore()}</Td>
+          <Td>{race && 
+                    race.users.find((user) => user.id === location.me).score.time}</Td>
+        </Tr>
+      </Tbody>
+    </Table>
+     
+        <button 
           onClick={() => {
             history.push({
               pathname: "/race-end",
@@ -41,9 +62,8 @@ export default function RaceEnd() {
             });
           }}
         >
-          Submit Time
+          Submit Time 
         </button>
       </div>
-    </div>
   );
 }
