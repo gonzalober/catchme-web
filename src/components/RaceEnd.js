@@ -9,8 +9,7 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 const border = {
   borderColor: 'white',
   marginBottom: '20px',
-  fontSize: 'x-large',
-  fontFamily: 'Roboto'
+  fontSize: 'small'
 }
 
 
@@ -34,18 +33,14 @@ export default function RaceEnd() {
       <Table>
       <Thead>
         <Tr >
-          <Th >Race Code:</Th>
           <Th>Distance:</Th>
-          <Th>Start Time:</Th>
           <Th>Time:</Th>
           <Th>Score:</Th>
         </Tr>
       </Thead>
       <Tbody>
         <Tr style={border}>
-          <Td>{race?.id}</Td>
           <Td>{race && race.distance}m</Td>
-          <Td>{race && race.startTime}</Td>
           <Td>{race && maxScore()}</Td>
           <Td>{race && 
                     race.users.find((user) => user.id === location.me).score.time}</Td>
