@@ -1,73 +1,76 @@
-### Catch Me App
+# CatchMe [![Build Status](https://travis-ci.com/gonzalober/catchme-web.svg?branch=master)](https://travis-ci.com/gonzalober/catchme-web)
 
-1 - Running app: 2-4 players run a set distance and compete to finish the set distance first. (GPS)
+CatchMe is a web application that allows you to race with your friends remotely, no login needed!
+CatchMe was made as a 2-week final project at Makers Academy. We are [Kiril](https://github.com/kiriarf), [Gonzalo](https://github.com/gonzalober), [David](https://github.com/dm-devtech) and [Mace](https://github.com/mace-akkari).
 
-App Name:
-catchme
+This repo includes the GraphQL API, which serves as our backend. You can find our frontend, built in ReactJS, [here](https://github.com/gonzalober/catchme-web)
 
-### Idea:
+[Demo Video](https://github.com/gonzalober/catchme-web)
 
-Running app: 2-4 players run a set distance and compete to finish the set distance first. (GPS)
+[Play CatchMe Here!](https://appcatchme.herokuapp.com)
 
-### Basic Idea:
+## How It Works
 
-You have a group (up to 4) you start a race at the same time
-Simplest goal (set goal of e.g. 1Km) / whoever runs the furthest in a set time
-App interface shows information (distance, time, which friends are participating, map)
-Interface split into 2 sections (bottom section shows participants, top section shows map with faces showing on map and map shows power ups where time freezes, tap another player to apply a penalty to / positive power up.)
+### Creating the Lobby and Connecting to it
 
-Singular game - one lobby give yourself a name, no authentication
+When you open the page, you can select one of the two options: create or find a race.
+When create race is selected, you are prompted to choose the distance for your race (in meters), and you become a host of this race. Share the race code with your friends!
+When find race is selected, you are prompted to enter the unique race code, and choose your name. You will then be connected to your friend's race as a guest.
 
-If we wanted stored history of results / averages we’d need log in/ authentication
+### Starting a Race
 
-People would be running outside
-Timer countdown before tracking begins
-Tracks distance not location
+Once you are in the lobby, you will see all of the participants. Click ```Ready!``` when you are! You will also be asked to allow location tracking.
+Once everybody is ready, the host will be able to see the ```Start Race``` button and click it.
 
-Table would be an instance of a race
+### Racing!
 
-### User stories:
+During the race, the users' real-time position will be tracked and a travel distance will be calculated.
+When your distance changes, it will be reflected in the progress bar. You will also see the distance displayed in meters.
+If you are lucky to finish first, the app will congratulate you. Now you have to wait for the others to finish...
+Once everybody crosses the finish line, you will be taken to a separate page with the race results.
 
-#### Start
+### Results
 
-- As a user so that other can join a game I want to create a lobby
-- As the lobby host I want to be able to start a game (then timer starts)
-- As the lobby host I want to be able to set distance / time
-- As a user so I can play with friends I want to join a lobby
-- As a user so I can be identified I want to enter a name when I join a lobby
+On the results page, you can see how long it took for the race to finish, as well as everybody's scores. Click the home button on the top of the screen to go back.
 
-#### During
+### Leaderboard
 
-- As a user I want to see the distance I’ve travelled at any moment. The app would have to Calculate distance / total distance
-- As a user I want to see a who is first/second on the map etc based on their position on the map
-- As a user I want to see a who is first/second on the leaderboard etc based on their position on the map
-- As a user so that I can time myself I want to see the timer (10 mins into game etc)
-- As a user so that I have a better chance of winning I want to use a powerup / a penalty
-- As a user I want to give someone else a penalty so I use a powerup on another player
+If you are fast enough to be in the global top 10, you will see your name in the leaderboard. You can access it from the home screen.
 
-#### End of game
 
-- As a user so I can see who won I want to see a winner/second/third/fourth at the end of the game
 
-### Stack
+## Tech Stack
 
-Front end - Javascript, React
-Back end/framework - Node/Express, GraphQL (like rest API but easier), Apollo (client for graphQL).
-Testing - Jest
+### Backend
 
-### First MVP
+| Technology    | Use                              |
+| ------------- | -------------------------------- |
+| Jest          | Testing                          |
+| ESLint        | Linting, airBNB style guide used |
+| Yarn          | package management               |
+| Nodemon       | running the server               |
+| GraphQL       | API design                       |
+| Apollo Server | GraphQL server framework         |
+| Sequelize     | Object-relational mapping        |
+| PostgreSQL    | Database                         |
+| Travis        | CI/CD                            |
+| Heroku        | Production Environment           |
 
-Get one person working with geolocation api - in memory for one user
-Simplest would be to show the result when everyone has finished (as a first MVP)
-Start location + current location that recalculates continually until 1km hit
-Just one player, leaderboard filtered by times
-Inputs - date, name and precise time
-Leaderboard could be any database.  
-Heroku for hosting / travis
+### Frontend
 
-### To run 
+| Technology    | Use                              |
+| ------------- | -------------------------------- |
+| Cypress       | Testing                          |
+| ESLint        | Linting                          |
+| Yarn          | package management               |
+| ReactJS       | Frontend JavaScript Framework    |
+| Apollo Client | Connecting to the GraphQL API    |
+| Sass          | Styling                          |
+| UIFX          | Adding sounds to pages           |
+| Travis        | CI/CD                            |
+| Heroku        | Production Environment           |
 
-```
-npm install 
+## Features Coming Soon
 
-```
+- Leaderboard stuff
+- Powerups
