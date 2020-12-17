@@ -41,11 +41,12 @@
     "lint": "./node_modules/.bin/eslint . --fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test2": "jest",
     "eject": "react-scripts eject",
     "coverage": "jest --coverage",
     "cy:run": "cypress run",
-    "startcov": "react-scripts -r @cypress/instrument-cra start"
+    "startcov": "react-scripts -r @cypress/instrument-cra start",
+    "test": "start-server-and-test start http://localhost:3000 cy:run"
   },
   "eslintConfig": {
     "extends": [
