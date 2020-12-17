@@ -1,8 +1,8 @@
-import React, { Component, useState, useEffect } from "react";
+import React from "react";
 import ProgressBar from "../components/ProgressBar.js";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { useLocation, useHistory } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 
 function Map() {
   const location = useLocation();
@@ -24,7 +24,6 @@ function Map() {
     let users = race.users;
     let i;
     const currentUser = race.users.find((user) => user.id === location.me);
-
     let arr = [];
 
     for (i = 0; i < users.length; i++) {
@@ -34,12 +33,11 @@ function Map() {
         distance: users[i].location.distance,
       });
     }
-    console.log(users);
 
-    if (currentUser && currentUser.score ) {
-      setYouveFinished("You have finished the race!")
+    if (currentUser && currentUser.score) {
+      setYouveFinished("You have finished the race!");
     }
-    
+
     if (users.every((user) => user.score)) {
       history.push({
         pathname: "/race-end",
@@ -47,7 +45,6 @@ function Map() {
         me: location.me,
       });
     }
-    console.log(arr);
 
     setCompletedDistances(arr);
     arr = [];
@@ -61,7 +58,7 @@ function Map() {
           <p>{obj.distance.toFixed(2)}m</p>
           <ProgressBar completed={obj.distance} raceDist={race.distance} />
           {obj.id === location.me ? (
-                  <p>{youveFinished}</p>
+                  <p className="finished">{youveFinished}</p>
                 ) : null}
         </div>
       ))}

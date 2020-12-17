@@ -1,10 +1,9 @@
-import React from 'react';
-import StopwatchDisplay from './StopwatchDisplay';
+import React from "react";
+import StopwatchDisplay from "./StopwatchDisplay";
 
 class StopwatchAutoStart extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       running: false,
       currentTimeMs: 0,
@@ -16,15 +15,15 @@ class StopwatchAutoStart extends React.Component {
   formatTime = (val, ...rest) => {
     let value = val.toString();
     if (value.length < 2) {
-      value = '0' + value;
+      value = "0" + value;
     }
-    if (rest[0] === 'ms' && value.length < 3) {
-      value = '0' + value;
+    if (rest[0] === "ms" && value.length < 3) {
+      value = "0" + value;
     }
     return value;
   };
 
-  start = () =>  {
+  start = () => {
     if (!this.state.running) {
       this.setState({ running: true });
       this.watch = setInterval(() => this.pace(), 10);
@@ -63,12 +62,12 @@ class StopwatchAutoStart extends React.Component {
   }
 
   componentWillUnmount() {
-    this.stop()
+    this.stop();
   }
 
   render() {
     return (
-      <div className={'stopwatch'}>
+      <div className={"stopwatch"}>
         <h2 ref="header">Time</h2>
         <StopwatchDisplay
           ref="display"

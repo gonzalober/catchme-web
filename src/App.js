@@ -8,14 +8,13 @@ import Leaderboard from "./Pages/Leaderboard.js";
 import Lobby from "./Pages/Lobby.js";
 import Race from "./Pages/Race.js";
 import RaceEnd from "./Pages/Race-end.js";
-
 import ApolloClient from "apollo-boost";
-
 import { ApolloProvider } from "@apollo/react-hooks";
 
 const client = new ApolloClient({
   uri: "https://catchme-server.herokuapp.com/",
 });
+
 
 function App() {
   return (
