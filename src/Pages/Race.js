@@ -11,7 +11,7 @@ function Race() {
   const mytheme = new UIfx(
     theme,
     {
-      volume: 0.8,
+      volume: 0.6,
       throttleMs: 100
     }
   )
