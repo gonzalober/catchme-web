@@ -6,9 +6,10 @@ import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 import Footer from "../components/Footer";
-import Button from "../assets/images/start-button.gif";
-import CLI from "../assets/SoundEffects/Button-sound.mp3";
-import UIfx from "uifx";
+import Button from "../assets/images/start-button.gif"
+import CLI from '../assets/SoundEffects/buttonClick.mp3'
+import Ready from '../assets/SoundEffects/Ready.mp3'
+import UIfx from 'uifx';
 
 export default function Lobby() {
   const [isEveryoneReady, setIsEveryoneReady] = React.useState(false);
@@ -26,10 +27,23 @@ export default function Lobby() {
   });
   const [createLocation] = useMutation(CREATE_LOCATION);
   const [updateRaceStartTime] = useMutation(UPDATE_RACE_START_TIME);
-  const Click = new UIfx(CLI, {
-    volume: 0.8,
-    throttleMs: 100,
-  });
+  
+  const buttonClick = new UIfx(
+    CLI,
+    {
+      volume: 0.8,
+      throttleMs: 100
+    }
+  );
+
+  const buttonReady = new UIfx(
+    Ready,
+    {
+      volume: 0.8,
+      throttleMs: 100
+    }
+  );
+
   const checkReady = () => {
     let i;
     let readyCounter = 0;
@@ -64,7 +78,7 @@ export default function Lobby() {
     }
   };
   const setStartTime = () => {
-    Click.play();
+    buttonReady.play();
     updateRaceStartTime({
       variables: {
         id: location.RaceId,
@@ -74,7 +88,7 @@ export default function Lobby() {
   };
   const handleReady = (param) => (e) => {
     navigator.geolocation.getCurrentPosition((data) => {});
-    Click.play();
+    buttonClick.play();
     createLocation({
       variables: {
         startLat: 0,
