@@ -3,9 +3,9 @@ import logo from '../images/logo.gif'
 import {Link} from 'react-router-dom';
 import Footer from '../components/Footer';
 import UIfx from 'uifx';
-import GameOver from '../components/SoundEffects/gameover.mp3'
-import BRUH from '../components/SoundEffects/Bruh.MP3'
-import CLI from '../components/SoundEffects/Button-sound.mp3'
+import GameOver from '../assets/SoundEffects/gameover.mp3'
+import BRUH from '../assets/SoundEffects/Bruh.MP3'
+import CLI from '../assets/SoundEffects/Button-sound.mp3'
 
 
 export default class Home extends Component {

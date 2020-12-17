@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GameOver from '../components/SoundEffects/gameover.mp3'
+import GameOver from '../assets/SoundEffects/gameover.mp3'
 import UIfx from "uifx";
 
 
