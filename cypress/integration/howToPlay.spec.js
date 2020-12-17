@@ -2,7 +2,7 @@ describe('Testing how to play page', function() {
 
   beforeEach(() => {
     // reset and seed the database prior to every test
-    cy.exec('yarn start')
+    cy.exec('yarn startcov')
 })
 
 describe('how to play page content', function() {

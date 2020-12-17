@@ -2,7 +2,7 @@ describe('Testing Homepage', function() {
 
   beforeEach(() => {
     // reset and seed the database prior to every test
-    cy.exec('yarn start')
+    cy.exec('yarn startcov')
 })
 
 describe('Homepage content', function() {
