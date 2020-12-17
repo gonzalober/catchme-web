@@ -61,7 +61,7 @@ function Map() {
           <p>{obj.distance.toFixed(2)}m</p>
           <ProgressBar completed={obj.distance} raceDist={race.distance} />
           {obj.id === location.me ? (
-                  <p>{youveFinished}</p>
+                  <p className="finished">{youveFinished}</p>
                 ) : null}
         </div>
       ))}
