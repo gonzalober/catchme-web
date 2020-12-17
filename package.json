@@ -5,12 +5,19 @@
   "private": true,
   "type": "module",
   "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "istanbul"
+    ],
     "presets": [
       "@babel/preset-react"
     ]
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@cypress/code-coverage": "^3.8.8",
+    "@cypress/instrument-cra": "^1.4.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -37,9 +44,8 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "coverage": "jest --coverage",
-    "startcy": "my-server -p 3000",
     "cy:run": "cypress run",
-    "testcy": "start-server-and-test startcy http://localhost:3000 cy:run"
+    "startcov": "react-scripts -r @cypress/instrument-cra start"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +72,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "nyc": "^15.1.0",
     "react-test-renderer": "^17.0.1"
   }
 }
