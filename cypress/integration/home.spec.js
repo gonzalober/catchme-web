@@ -1,57 +1,186 @@
 describe('Testing Homepage', function() {
 
-  beforeEach(() => {
-    // reset and seed the database prior to every test
-    cy.exec('yarn startcov')
-})
-
-describe('Homepage content', function() {
-  it('Homepage has correct content', function() {
-    cy.visit('/')
-    cy.contains('CatchMe')
-    cy.get('[alt="Logo"]').should('be.visible')
-    cy.contains('The app that keeps you running')
-    cy.contains('Create a race')
-    cy.contains('Leaderboard')
-    cy.get('button').contains('How to play')
-    cy.get('button').contains('Create a race')
-    cy.get('button').contains('Leaderboard')
-  })
-})
-
-describe('Homepage Links', function() {
-  it('click link to how-to-play loads how to play', function() {
-    cy.visit('/')
-    cy.get('button').contains('How to play').click()
-    cy.location('pathname').should('include', 'how-to-play')
-    cy.get('[alt="Logo"]').should('be.visible')
-    cy.contains('How to Play')
-    cy.contains('1 - Create race')
-    cy.contains('2 - Add users')
-    cy.contains('3 - Start race')
-    cy.contains('4 - Race ends')
+  describe('Homepage content', function() {
+    it('Homepage has correct content', function() {
+      cy.visit('/')
+      cy.get('h1').contains('CatchMe')
+      cy.get('[alt="Logo"]').should('be.visible')
+      cy.get('p').contains('The app that keeps you running')
+      cy.get('button').contains('How to play')
+      cy.get('button').contains('Create a race')
+      cy.get('button').contains('Leaderboard')
+      cy.get('button').contains('Find a race')
+      cy.get('p').contains('KiMaGoDa')
+    })
   })
 
-  it('click link to Create a race loads Create a race page', function() {
-    cy.visit('/')
-    cy.get('button').contains('Create a race').click()
-    cy.contains('CatchMe')
-    cy.contains('Race parameters')
-    cy.get('[alt="Logo"]').should('be.visible')
+  describe('Homepage Links', function() {
+    it('click link to how-to-play loads how to play', function() {
+      cy.visit('/')
+      cy.get('button').contains('How to play').click()
+      cy.location('pathname').should('include', 'how-to-play')
+      cy.get('[alt="home-icon"]').should('be.visible')
+      cy.get('h2').contains('How to Play')
+      cy.get('p').contains('1 - Create race')
+      cy.get('p').contains('2 - Add users')
+      cy.get('p').contains('3 - Click ready')
+      cy.get('p').contains('4 - Start race -(Only host)')
+      cy.get('p').contains('5 - Race ends')
+      cy.readFile('src/components/SoundEffects/Bruh.MP3', 'base64').then((mp3) => {
+        const uri = 'data:audio/mp3;base64,' + mp3
+        const audio = new Audio(uri)
+
+        audio.play()
+    })
   })
 
-  it('click link to Create a race loads Leaderboard', function() {
-    cy.visit('/')
-    cy.get('button').contains('Leaderboard').click()
-    cy.contains('Leaderboard')
-    cy.contains('User')
-    cy.contains('Time')
-    cy.contains('Distance')
-    cy.contains('Date')
-    cy.get('[alt="Logo"]').should('be.visible')
+
+    it('click link to Create a race loads Create a race page', function() {
+      cy.visit('/')
+      cy.get('button').contains('Create a race').click()
+      cy.location('pathname').should('include', 'createrace')
+      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+        const uri = 'data:audio/mp3;base64,' + mp3
+        const audio = new Audio(uri)
+
+        audio.play()
+    })
+      cy.get('h1').contains('CatchMe')
+      cy.get('h2').contains('Race parameters')
+      cy.get('[alt="home-icon"]').should('be.visible')
+      cy.get('span').contains('10m')
+      cy.get('span').contains('50m')
+      cy.get('span').contains('500m')
+      cy.get('span').contains('1000m')
+      cy.get('span').contains('1500m')
+      cy.get('span').contains('2000m')
+      cy.get('p').contains('Enter your name:')
+      cy.get('input').contains('Create Race')
+      cy.get('p').contains('KiMaGoDa')
+    })
+
+    it('click leaderboard button loads Leaderboard', function() {
+      cy.visit('/')
+      cy.get('button').contains('Leaderboard').click()
+      cy.location('pathname').should('include', 'leaderboard')
+      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+        const uri = 'data:audio/mp3;base64,' + mp3
+        const audio = new Audio(uri)
+
+        audio.play()
+      })
+      cy.get('h1').contains('CatchMe')
+      cy.get('h1').contains('Leaderboard')
+      cy.get('table').contains('Rank')
+      cy.get('table').contains('User')
+      cy.get('table').contains('Time')
+      cy.get('[alt="plus-icon"]').should('be.visible')
+      cy.get('p').contains('KiMaGoDa')
+    })
+
+    it('click find a race button', function() {
+      cy.visit('/')
+      cy.get('button').contains('Find a race').click()
+      cy.location('pathname').should('include', 'findrace')
+      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+        const uri = 'data:audio/mp3;base64,' + mp3
+        const audio = new Audio(uri)
+
+        audio.play()
+      })
+      cy.get('h1').contains('CatchMe')
+      cy.get('h2').contains('Race Finder')
+      cy.get('p').contains('Enter your name:')
+      cy.get('input').contains('Find Race')
+      cy.get('[alt="home-icon"]').should('be.visible')
+      cy.get('[alt="plus-icon"]').should('be.visible')
+      cy.get('p').contains('KiMaGoDa')
+    })
   })
-})
 
+  describe('Home button links back to homepage from other pages', function() {
+    it('Homepage to how to play then back to home using home icon', function() {
+      cy.visit('/')
+      cy.get('button').contains('How to play').click()
+      cy.location('pathname').should('include', 'how-to-play')
+      cy.get('h2').contains('How to Play')
+      cy.get('p').contains('1 - Create race')
+      cy.get('p').contains('2 - Add users')
+      cy.get('p').contains('3 - Click ready')
+      cy.get('p').contains('4 - Start race -(Only host)')
+      cy.get('p').contains('5 - Race ends')
+      cy.get('[alt="home-icon"]').click()
+      cy.get('h1').contains('CatchMe')
+      cy.get('[alt="Logo"]').should('be.visible')
+      cy.get('p').contains('The app that keeps you running')
+      cy.get('button').contains('How to play')
+      cy.get('button').contains('Create a race')
+      cy.get('button').contains('Leaderboard')
+      cy.get('button').contains('Find a race')
+      cy.get('p').contains('KiMaGoDa')
+    })
 
+    it('Homepage to Create a race then back to home using home icon', function() {
+      cy.visit('/')
+      cy.get('button').contains('Create a race').click()
+      cy.location('pathname').should('include', 'createrace')
+      cy.get('h1').contains('CatchMe')
+      cy.get('h2').contains('Race parameters')
+      cy.get('[alt="home-icon"]').should('be.visible')
+      cy.get('span').contains('10m')
+      cy.get('span').contains('50m')
+      cy.get('span').contains('500m')
+      cy.get('span').contains('1000m')
+      cy.get('span').contains('1500m')
+      cy.get('span').contains('2000m')
+      cy.get('[alt="home-icon"]').click()
+      cy.get('h1').contains('CatchMe')
+      cy.get('[alt="Logo"]').should('be.visible')
+      cy.get('p').contains('The app that keeps you running')
+      cy.get('button').contains('How to play')
+      cy.get('button').contains('Create a race')
+      cy.get('button').contains('Leaderboard')
+      cy.get('button').contains('Find a race')
+      cy.get('p').contains('KiMaGoDa')
+    })
 
+    it('Homepage to find a race then back to home using home icon', function() {
+      cy.visit('/')
+      cy.get('button').contains('Find a race').click()
+      cy.location('pathname').should('include', 'findrace')
+      cy.get('h1').contains('CatchMe')
+      cy.get('h2').contains('Race Finder')
+      cy.get('p').contains('Enter your name:')
+      cy.get('input').contains('Find Race')
+      cy.get('[alt="home-icon"]').click()
+      cy.get('h1').contains('CatchMe')
+      cy.get('[alt="Logo"]').should('be.visible')
+      cy.get('p').contains('The app that keeps you running')
+      cy.get('button').contains('How to play')
+      cy.get('button').contains('Create a race')
+      cy.get('button').contains('Leaderboard')
+      cy.get('button').contains('Find a race')
+      cy.get('p').contains('KiMaGoDa')
+    })
+
+    it('Homepage to leaderboard then back to home using home icon', function() {
+      cy.visit('/')
+      cy.get('button').contains('Leaderboard').click()
+      cy.location('pathname').should('include', 'leaderboard')
+      cy.get('h1').contains('CatchMe')
+      cy.get('h1').contains('Leaderboard')
+      cy.get('table').contains('Rank')
+      cy.get('table').contains('User')
+      cy.get('table').contains('Time')
+      cy.get('[alt="home-icon"]').click()
+      cy.get('h1').contains('CatchMe')
+      cy.get('[alt="Logo"]').should('be.visible')
+      cy.get('p').contains('The app that keeps you running')
+      cy.get('button').contains('How to play')
+      cy.get('button').contains('Create a race')
+      cy.get('button').contains('Leaderboard')
+      cy.get('button').contains('Find a race')
+      cy.get('p').contains('KiMaGoDa')
+    })
+  })
 })
