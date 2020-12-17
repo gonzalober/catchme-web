@@ -69,7 +69,7 @@ class StopwatchAutoStart extends React.Component {
   render() {
     return (
       <div className={'stopwatch'}>
-        <h2 ref="header">Stopwatch</h2>
+        <h2 ref="header">Time</h2>
         <StopwatchDisplay
           ref="display"
           {...this.state}

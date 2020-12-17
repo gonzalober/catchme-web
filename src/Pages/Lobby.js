@@ -130,9 +130,7 @@ export default function Lobby() {
         </ol>
         {location.isHost && isEveryoneReady && (
           <button onClick={setStartTime}>
-            <img className="start-button" alt="start-button" />
-            Start
-          </button>
+            <img src={Button} className="start-button" alt="start-button" /></button>
         )}
       </div>
       <Footer />

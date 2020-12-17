@@ -50,7 +50,7 @@ export default function RaceEnd() {
       <Tbody>
         <Tr style={border}>
           <Td>{race && race.distance}m</Td>
-          <Td>{race && maxScore()}</Td>
+          <Td>{race && msToTime(maxScore())}</Td>
           <Td>{race && 
                     race.users.find((user) => user.id === location.me).score.time}</Td>
         </Tr>
@@ -61,7 +61,7 @@ export default function RaceEnd() {
       {race.users.map((obj) => (
         <div key={obj.id}>
           <p>
-            {obj.username} = {parseInt(obj.score.time.toFixed(2))}
+            {obj.username} = {msToTime(parseInt(obj.score.time.toFixed(2)))}
           </p>
         </div>
       ))}
