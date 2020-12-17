@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import logo from '../images/logo.gif'
-import {Link} from 'react-router-dom';
-import Footer from '../components/Footer';
-import UIfx from 'uifx';
-import BRUH from '../assets/SoundEffects/Bruh.MP3'
-import CLI from '../assets/SoundEffects/buttonClick.mp3'
-import theme from '../assets/SoundEffects/catchMe.mp3'
-
+import logo from "../assets/images/logo.gif";
+import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import UIfx from "uifx";
+import GameOver from "../assets/SoundEffects/gameover.mp3";
+import BRUH from "../assets/SoundEffects/Bruh.MP3";
+import CLI from "../assets/SoundEffects/Button-sound.mp3";
 
 export default class Home extends Component {
   render() {
+    const beep = new UIfx(GameOver, {
+      volume: 0.8,
+      throttleMs: 100,
+    });
 
     const Bruh = new UIfx(
       BRUH,
@@ -41,9 +44,6 @@ export default class Home extends Component {
         <button onClick={() =>  buttonClick.play()}><Link to={"/leaderboard"}>Leaderboard</Link></button>
         <img className="running-boy" src={logo} alt="Logo" />
       </div>
-      <Footer />
-    </div>
-
-    )
+    );
   }
 }
