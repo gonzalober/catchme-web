@@ -26,7 +26,7 @@ describe('Testing Homepage', function() {
       cy.get('p').contains('3 - Click ready')
       cy.get('p').contains('4 - Start race -(Only host)')
       cy.get('p').contains('5 - Race ends')
-      cy.readFile('src/components/SoundEffects/Bruh.MP3', 'base64').then((mp3) => {
+      cy.readFile('src/assets/SoundEffects/Bruh.MP3', 'base64').then((mp3) => {
         const uri = 'data:audio/mp3;base64,' + mp3
         const audio = new Audio(uri)
 
@@ -39,7 +39,7 @@ describe('Testing Homepage', function() {
       cy.visit('/')
       cy.get('button').contains('Create a race').click()
       cy.location('pathname').should('include', 'createrace')
-      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+      cy.readFile('src/assets/SoundEffects/buttonClick.mp3', 'base64').then((mp3) => {
         const uri = 'data:audio/mp3;base64,' + mp3
         const audio = new Audio(uri)
 
@@ -49,7 +49,6 @@ describe('Testing Homepage', function() {
       cy.get('h2').contains('Race parameters')
       cy.get('[alt="home-icon"]').should('be.visible')
       cy.get('span').contains('10m')
-      cy.get('span').contains('50m')
       cy.get('span').contains('500m')
       cy.get('span').contains('1000m')
       cy.get('span').contains('1500m')
@@ -63,7 +62,7 @@ describe('Testing Homepage', function() {
       cy.visit('/')
       cy.get('button').contains('Leaderboard').click()
       cy.location('pathname').should('include', 'leaderboard')
-      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+      cy.readFile('src/assets/SoundEffects/buttonClick.mp3', 'base64').then((mp3) => {
         const uri = 'data:audio/mp3;base64,' + mp3
         const audio = new Audio(uri)
 
@@ -82,7 +81,7 @@ describe('Testing Homepage', function() {
       cy.visit('/')
       cy.get('button').contains('Find a race').click()
       cy.location('pathname').should('include', 'findrace')
-      cy.readFile('src/components/SoundEffects/Button-sound.mp3', 'base64').then((mp3) => {
+      cy.readFile('src/assets/SoundEffects/buttonClick.mp3', 'base64').then((mp3) => {
         const uri = 'data:audio/mp3;base64,' + mp3
         const audio = new Audio(uri)
 
@@ -128,7 +127,6 @@ describe('Testing Homepage', function() {
       cy.get('h2').contains('Race parameters')
       cy.get('[alt="home-icon"]').should('be.visible')
       cy.get('span').contains('10m')
-      cy.get('span').contains('50m')
       cy.get('span').contains('500m')
       cy.get('span').contains('1000m')
       cy.get('span').contains('1500m')
