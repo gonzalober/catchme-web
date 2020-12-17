@@ -1,6 +1,6 @@
 import React from "react";
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useQuery } from "@apollo/react-hooks";
+import { useLocation, useHistory } from "react-router-dom";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_SCORE } from "../graphql/mutations/createScore";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
@@ -11,7 +11,6 @@ const border = {
   marginBottom: '20px',
   fontSize: 'small'
 }
-
 
 export default function RaceEnd() {
   const location = useLocation();
@@ -28,8 +27,18 @@ export default function RaceEnd() {
     return maximum;
   };
 
+  function msToTime(duration) {
+    var milliseconds = parseInt((duration % 1000) / 10),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    return minutes + ":" + seconds + ":" + milliseconds;
+  }
+
   return (
       <div className="lobby-page">
+      <h1>Race Complete!</h1>
       <Table>
       <Thead>
         <Tr >
@@ -47,18 +56,16 @@ export default function RaceEnd() {
         </Tr>
       </Tbody>
     </Table>
-     
-        <button 
-          onClick={() => {
-            history.push({
-              pathname: "/race-end",
-              RaceId: race.id,
-              me: location.me,
-            });
-          }}
-        >
-          Submit Time 
-        </button>
-      </div>
+    <div>
+      Score:{" "}
+      {race.users.map((obj) => (
+        <div key={obj.id}>
+          <p>
+            {obj.username} = {parseInt(obj.score.time.toFixed(2))}
+          </p>
+        </div>
+      ))}
+    </div>
+    </div>
   );
 }

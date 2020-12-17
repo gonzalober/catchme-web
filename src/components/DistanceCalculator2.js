@@ -59,8 +59,8 @@ export default function DistanceCalculator() {
     const timerHandler = setInterval(() => {
       navigator.geolocation.getCurrentPosition(
         (data) => {
-          let lat = data.coords.latitude;
-          let long = data.coords.longitude;
+          let lat = parseFloat(data.coords.latitude.toFixed(5));
+          let long = parseFloat(data.coords.longitude.toFixed(5));
           if (shouldRunFirst) {
             setStartCoor({ lat, long });
             setEndCoor({ lat, long });
@@ -84,13 +84,14 @@ export default function DistanceCalculator() {
   useEffect(() => {
     if (!first) {
       setDistance(
-        distance +
-          computeDistance(
-            startCoor.lat,
-            startCoor.long,
-            endCoor.lat,
-            endCoor.long
-          )
+        distance >= location.raceDistance ? location.raceDistance :
+          distance +
+            computeDistance(
+              startCoor.lat,
+              startCoor.long,
+              endCoor.lat,
+              endCoor.long
+            )
       );
       console.log("current distance in state: ", distance);
       setStartCoor({ ...endCoor });
@@ -113,11 +114,6 @@ export default function DistanceCalculator() {
           endLong: endCoor.long,
           distance,
         },
-
-        // refetchQueries: [
-        //   { query: QUERY_RACE, variables: { id: location.RaceId } },
-        //   { query: QUERY_LOCATION, variables: { id: location.myLocId } },
-        // ],
       });
       const { data: { race } = {} } = await client.query({
         query: QUERY_RACE,
@@ -127,7 +123,12 @@ export default function DistanceCalculator() {
       const user = race.users.filter((user) => {
         return user.id === location.me;
       });
-      console.log("user's distance in db: ", user[0].location.distance, location.me, race.distance);
+      console.log(
+        "user's distance in db: ",
+        user[0].location.distance,
+        location.me,
+        race.distance
+      );
       console.log("all users in db: ", race.users);
       if (distance > race.distance) {
         userRaceTime = Date.now() - race.startTime;

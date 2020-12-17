@@ -5,7 +5,7 @@ import Header2 from "../components/Header2";
 import { QUERY_RACE } from "../graphql/queries/race";
 import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
 import Button from "../images/start-button.gif"
 // import CLI from '../components/SoundEffects/Button-sound.mp3'
 // import UIfx from 'uifx';
@@ -20,15 +20,14 @@ export default function Lobby() {
     variables: { id: location.RaceId },
     pollInterval: 2000,
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
     onCompleted: async () => {
       await checkReady();
       await checkStarted();
-    }
+    },
   });
   const [createLocation] = useMutation(CREATE_LOCATION);
   const [updateRaceStartTime] = useMutation(UPDATE_RACE_START_TIME);
-  
   const checkReady = () => {
     let i;
     let readyCounter = 0;
@@ -43,16 +42,22 @@ export default function Lobby() {
       setIsEveryoneReady(false);
     }
   };
-
   const checkStarted = () => {
-    if(race.startTime != null) {
+    if (race.startTime != null) {
       let k;
       for (k = 0; k < race.users.length; k++) {
-        if(race.users[k].id === location.me) {
-          console.log("DETAILS:", race.users[k].location.endLat,race.users[k].location.endLong,race.users[k].location.distance,race.users[k].location.id)
+        if (race.users[k].id === location.me) {
+          console.log(
+            "DETAILS:",
+            race.users[k].location.endLat,
+            race.users[k].location.endLong,
+            race.users[k].location.distance,
+            race.users[k].location.id
+          );
           history.push({
             pathname: "./race",
             RaceId: race.id,
+            raceDistance: race.distance,
             me: location.me,
             myEndLat: race.users[k].location.endLat,
             myEndLong: race.users[k].location.endLong,
@@ -62,8 +67,7 @@ export default function Lobby() {
         }
       }
     }
-  }
-
+  };
   const setStartTime = () => {
     updateRaceStartTime({
       variables: {
@@ -71,9 +75,9 @@ export default function Lobby() {
         startTime: Date.now(),
       },
     });
-  }
-
+  };
   const handleReady = (param) => (e) => {
+    navigator.geolocation.getCurrentPosition((data) => {});
     createLocation({
       variables: {
         startLat: 0,
@@ -86,7 +90,8 @@ export default function Lobby() {
       refetchQueries: [
         { query: QUERY_RACE, variables: { id: location.RaceId } },
       ],
-    }); 
+    });
+    console.log("i still create a location :(");
   };
 
   // const Click = new UIfx(
@@ -123,8 +128,12 @@ export default function Lobby() {
               </li>
             ))}
         </ol>
-        {location.isHost && isEveryoneReady &&
-          <button onClick={setStartTime}><img className="start-button" src={Button} alt="start-button" /> </button>}
+        {location.isHost && isEveryoneReady && (
+          <button onClick={setStartTime}>
+            <img className="start-button" alt="start-button" />
+            Start
+          </button>
+        )}
       </div>
       <Footer />
     </div>

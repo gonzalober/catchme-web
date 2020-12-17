@@ -1,13 +1,54 @@
 import React from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { useQuery } from "@apollo/react-hooks";
+import { SCORES_QUERY } from "../graphql/queries/scores";
 
-const border = {
-  borderColor: 'white',
-  marginBottom: '20px'
-}
 
-export default function LeaderTable(props) {
+
+
+
+
+export default function LeaderTable() {
+  const border = {
+    borderColor: 'white',
+    marginBottom: '20px'
+  }
+  let top10;
+
+  const { data: { scores } = {} } = useQuery(SCORES_QUERY);
+
+  function msToTime(duration) {
+    var milliseconds = parseInt((duration % 1000) / 10),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+  
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+  
+    return minutes + ":" + seconds + "." + milliseconds;
+  }
+
+  const sortArray = () => {
+    if ( scores ) {
+      console.log(scores);
+      const sortedScores = scores.sort((a,b) => (a.time < b.time) ? -1 : 1 );
+      console.log("sorted:", sortedScores)
+      top10 = sortedScores.slice(0, 10);
+      console.log("top10: ", top10);
+      return (
+        top10.map((score) => (
+          <Tr style={border} key={score.id}>
+            <Td>{top10.indexOf(score) + 1}</Td>
+            <Td>{score.user.username}</Td>
+            <Td>{msToTime(score.time)}</Td>
+          </Tr>
+        ))
+      )   
+    }
+  }
+  
+
   return (
     <Table>
       <Thead>
@@ -15,32 +56,10 @@ export default function LeaderTable(props) {
           <Th>Rank</Th>
           <Th>User</Th>
           <Th>Time</Th>
-          <Th>Distance</Th>
-          <Th>Date</Th>
         </Tr>
       </Thead>
       <Tbody>
-        <Tr style={border}>
-          <Td>1st</Td>
-          <Td>David</Td>
-          <Td>07:54.321</Td>
-          <Td>1km</Td>
-          <Td>09/12/20</Td>
-        </Tr>
-        <Tr style={border}>
-          <Td>2nd</Td>
-          <Td>Gonzalo</Td>
-          <Td>07:52.456</Td>
-          <Td>1km</Td>
-          <Td>09/12/20</Td>
-        </Tr>
-        <Tr style={border}>
-          <Td>3rd</Td>
-          <Td>Kiril</Td>
-          <Td>07:50.456</Td>
-          <Td>1km</Td>
-          <Td>09/12/20</Td>
-        </Tr>
+      {sortArray()}
       </Tbody>
     </Table>
   );
