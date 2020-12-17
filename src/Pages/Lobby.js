@@ -7,7 +7,7 @@ import { CREATE_LOCATION } from "../graphql/mutations/createLocation";
 import { UPDATE_RACE_START_TIME } from "../graphql/mutations/updateRaceStartTime";
 import Footer from "../components/Footer";
 import Button from "../images/start-button.gif"
-import CLI from '../components/SoundEffects/Button-sound.mp3'
+import CLI from '../assets/SoundEffects/Button-sound.mp3'
 import UIfx from 'uifx';
 
 export default function Lobby() {

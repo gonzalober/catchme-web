@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { CREATE_RACE } from "../graphql/mutations/createRace";
 import { CREATE_USER } from "../graphql/mutations/createUser";
 import { useHistory } from "react-router-dom";
-import CLI from '../components/SoundEffects/Button-sound.mp3'
+import CLI from '../assets/SoundEffects/Button-sound.mp3'
 import UIfx from 'uifx';
 
 export default function CreateRaceForm() {
