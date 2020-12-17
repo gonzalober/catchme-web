@@ -3,8 +3,10 @@ import { useMutation } from "@apollo/react-hooks";
 import { CREATE_RACE } from "../graphql/mutations/createRace";
 import { CREATE_USER } from "../graphql/mutations/createUser";
 import { useHistory } from "react-router-dom";
-import CLI from '../assets/SoundEffects/Button-sound.mp3'
 import UIfx from 'uifx';
+import CLI from '../assets/SoundEffects/buttonClick.mp3'
+
+
 
 export default function CreateRaceForm() {
   const [distance, setDistance] = React.useState("500");
@@ -42,7 +44,7 @@ export default function CreateRaceForm() {
     history.push("./Lobby");
   };
 
-  const Click = new UIfx(
+  const buttonClick = new UIfx(
     CLI,
     {
       volume: 0.8,
@@ -64,27 +66,27 @@ export default function CreateRaceForm() {
         <div onChange={handleRadioChange} className="form">
           <h2>Race parameters</h2>
           <label className="radio">
-            <input type="radio" value="10" name="distance" />
+            <input onClick={() =>  buttonClick.play()} type="radio" value="10" name="distance" />
             <span style={{paddingLeft:"46px"}}> 10m</span>
           </label>
           <label className="radio">
-            <input type="radio" value="50" name="distance" />
+            <input onClick={() =>  buttonClick.play()} type="radio" value="50" name="distance" />
             <span style={{paddingLeft:"46px"}}> 50m</span>
           </label>
           <label className="radio">
-            <input type="radio" value="500" name="distance" />
+            <input onClick={() =>  buttonClick.play()} type="radio" value="500" name="distance" />
             <span style={{paddingLeft:"46px"}}> 500m</span>
           </label>
           <label className="radio">
-            <input type="radio" value="1000" name="distance" />
+            <input onClick={() =>  buttonClick.play()} type="radio" value="1000" name="distance" />
             <span> 1000m</span>
           </label>
           <label className="radio">
-            <input type="radio" value="1500" name="distance" />
+            <input onClick={() =>  buttonClick.play()} type="radio" value="1500" name="distance" />
             <span> 1500m</span>
           </label>
           <label className="radio">
-            <input type="radio" value="2000" name="distance" />
+            <input onClick={() =>  buttonClick.play()} type="radio" value="2000" name="distance" />
             <span> 2000m</span>
           </label>
           </div>
@@ -92,7 +94,7 @@ export default function CreateRaceForm() {
           <p>Enter your name: </p>
           <input type="text" defaultValue=""/>
         </div>
-        <input onClick={() =>  Click.play()} className="form-submit" type="submit" value="Create Race" />
+        <input onClick={() =>  buttonClick.play()} className="form-submit" type="submit" value="Create Race" />
       </form>
     </div>
   );
