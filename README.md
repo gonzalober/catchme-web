@@ -1,6 +1,5 @@
 # CatchMe [![Build Status](https://travis-ci.com/gonzalober/catchme-web.svg?branch=main)](https://travis-ci.com/gonzalober/catchme-web)
 
-
 ![Logo](src/assets/images/logo.gif)
 
 CatchMe is a web application that allows you to race with your friends remotely, no login needed!
