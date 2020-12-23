@@ -46,7 +46,7 @@
     "coverage": "jest --coverage",
     "cy:run": "cypress run",
     "startcov": "react-scripts -r @cypress/instrument-cra start",
-    "test": "start-server-and-test start http://localhost:3000 cy:run --delay"
+    "test": "start-server-and-test start-server http://localhost:3000 cy:run --delay"
   },
   "eslintConfig": {
     "extends": [
