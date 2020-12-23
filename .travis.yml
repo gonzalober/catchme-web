@@ -8,4 +8,5 @@ cache:
 script:
   - yarn install
   - yarn cypress install
+  - yarn start
   - yarn test
