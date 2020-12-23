@@ -45,8 +45,6 @@ describe("Testing Find Race Page", function () {
       cy.get("input").contains("Find Race").click();
       cy.get("h1").contains("CatchMe");
       cy.get('[alt="home-icon"]').should("be.visible");
-      cy.get("li").contains("Jimmy");
-      cy.get("button").contains("Ready!");
       cy.get("p").contains("KiMaGoDa");
     });
   });
